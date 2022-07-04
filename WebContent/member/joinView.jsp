@@ -14,7 +14,7 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-	<form action="${conPath }/join.do" name="join_frm" method="post">
+	<form action="${conPath }/join.do" name="join_frm" method="post" enctype="multipart/form-data">
 		<table class="join_table">
 			<caption>회원가입</caption>
 			<tr>
@@ -40,6 +40,10 @@
 			<tr>
 				<th>이메일</th>
 				<td><input type="text" name="memail" required="required"></td>
+			</tr>
+			<tr>
+				<th>사진</th>
+				<td><input type="file" name="mphoto"></td>
 			</tr>
 			<tr>
 				<th>성별</th>

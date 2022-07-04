@@ -11,6 +11,7 @@ CREATE TABLE MEMBER(
     mID VARCHAR2(30) PRIMARY KEY,
     mPW VARCHAR2(30) NOT NULL,
     mNAME VARCHAR2(30) UNIQUE NOT NULL,
+    mPHOTO VARCHAR2(100),
     mBIRTH DATE,
     mGENDER VARCHAR2(10) NOT NULL,
     mEMAIL VARCHAR2(30) UNIQUE NOT NULL,
@@ -20,20 +21,20 @@ CREATE TABLE MEMBER(
     mWRITECOUNT NUMBER(5) DEFAULT 0
 );
 
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('moan', '1234', '문희석', '1995-12-05', 'm', 'INTJ', 'moan@moan.com');
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('aaa', '1234', '홍길동1', '1995-12-05', 'm', 'ENTP', 'moan1@moan.com');
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('bbb', '1234', '홍길동2', '1995-12-05', 'm', 'ISFJ', 'moan2@moan.com');
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('ccc', '1234', '홍길동3', '1995-12-05', 'm', 'INFP', 'moan3@moan.com');
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('ddd', '1234', '홍길동4', '1995-12-05', 'm', 'ENTJ', 'moan4@moan.com');
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('eee', '1234', '홍길동5', '1995-12-05', 'm', 'ENFP', 'moan5@moan.com');
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('fff', '1234', '홍길동6', '1995-12-05', 'm', 'ESFJ', 'moan6@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('moan1', '1234', '문희석', 'gico.jpg', '1995-12-05', 'm', 'INTJ', 'moan11@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('aaa1', '1234', '홍길동12', 'kang.jpg', '1995-12-05', 'm', 'ENTP', 'moan12@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('bbb1', '1234', '홍길동23', 'jo.jpg', '1995-12-05', 'm', 'ISFJ', 'moan23@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('ccc1', '1234', '홍길동33', 's.jpg', '1995-12-05', 'm', 'INFP', 'moan34@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('ddd1', '1234', '홍길동43', 'go.jpg', '1995-12-05', 'm', 'ENTJ', 'moan45@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('eee1', '1234', '홍길동53', 'lee.jpg', '1995-12-05', 'm', 'ENFP', 'moan56@moan.com');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
+    VALUES('fff1', '1234', '홍길동63', 'lee.jpg', '1995-12-05', 'm', 'ESFJ', 'moan67@moan.com');
     
 
 SELECT * FROM MEMBER;
@@ -162,7 +163,10 @@ INSERT INTO ONEBOARD(obNO, mID, obTITLE, obCONTENT, obGROUP, obSTEP, ObIP, obGET
 
 
 
-
+SELECT * FROM MEMBER;
+SELECT * FROM FREEBOARD;
+SELECT * FROM REPLY;
+SELECT * FROM ONEBOARD;
 
 
 

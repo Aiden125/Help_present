@@ -18,8 +18,6 @@ public class BcontentViewService implements Service {
 		ReplyDao rDao = ReplyDao.getInstance();
 		request.setAttribute("freeBoard", fDao.contentViewAndHit(bno, bgroup));
 		request.setAttribute("answerList", fDao.replyListView(bgroup));
-		request.setAttribute("replyList", rDao.replyList(bno, bgroup));
-		
-		
+		request.setAttribute("replyList", rDao.replyList(bno, bgroup));		
 	}
 }

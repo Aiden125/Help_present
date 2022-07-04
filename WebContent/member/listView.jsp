@@ -23,11 +23,12 @@
 		<tr>
 			<c:forEach var="dto" items="${list }">
 				<td>
+					<img src="${conPath }/memberPhotoUp/${dto.mphoto}" alt="${dto.mname }등록사진" width="150px"><br> 
 					${dto.mid}<br>
 					${dto.mpw}<br>
 					<a href="${conPath }/memberContentView.do?mid=${dto.mid}">${dto.mname }</a><br>
 					(${dto.memail })<br>
-					(${dto.mbirth })<br>
+					(${dto.mbirth })<br>					
 					<c:if test="${not empty dto.mmbti}">${dto.mmbti }</c:if>
 					<c:if test="${empty dto.mmbti}">미등록</c:if><br>
 					(${dto.mrdate })<br>

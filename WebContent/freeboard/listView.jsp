@@ -106,7 +106,7 @@
 								</c:if>
 							</c:forEach>
 							<a href="${conPath }/freeBoardContentView.do?bno=${dto.bno }&pageNum=${pageNum }&bgroup=${dto.bgroup}&bindent=${dto.bindent}">
-							${dto.btitle }</a>
+							${dto.btitle }[${dto.banswercount }]</a>
 							
 							<!-- 조회수 10이상이면 * 넣기 -->
 							<c:if test="${dto.bhit >= 10 }">

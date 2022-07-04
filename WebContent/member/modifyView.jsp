@@ -25,39 +25,44 @@
 </c:if>
 
 <jsp:include page="../main/header.jsp"/>
-	<form action="${conPath }/modify.do" name="join_frm" method="post">
+	<form action="${conPath }/modify.do" name="join_frm" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="dbmphoto" value="${member.mphoto }">
 		<table class="join_table">
 			<caption>정보수정</caption>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="mid" value="${member.mid }" readonly="readonly"></td>
+				<td colspan="2"><input type="text" name="mid" value="${member.mid }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" name="mpw" required="required"></td>
+				<td colspan="2"><input type="password" name="mpw" required="required"></td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
-				<td><input type="text" name="mname" value="${member.mname }" required="required"></td>
+				<td colspan="2"><input type="text" name="mname" value="${member.mname }" required="required"></td>
 			</tr>
 			<tr>
 				<th>나의 MBTI</th>
-				<td><input type="text" value="${member.mmbti }" name="mmbti"></td>
+				<td colspan="2"><input type="text" value="${member.mmbti }" name="mmbti"></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="text" name="memail" value="${member.memail }" required="required"></td>
+				<td colspan="2"><input type="text" name="memail" value="${member.memail }" required="required"></td>
+			</tr>
+			<tr>
+				<th>사진</th>
+				<td colspan="2" ><img src="${conPath }/memberPhotoUp/${member.mphoto}" alt="나의 등록사진" width="150px"><input type="file" name="mphoto"></td>
 			</tr>
 			<tr>
 				<th>성별</th>
-				<td>
+				<td colspan="2">
 				<label><input type="radio" name="mgender" value="m" checked="checked"> 남자</label>
       			<label><input type="radio" name="mgender" value="f"> 여자</label>
 				</td>
 			</tr>
 			<tr class="lasttr">
 				<th>생년월일</th>
-				<td><input type="date" value="${member.mbirth }" name="mbirth"></td>
+				<td colspan="2"><input type="date" value="${member.mbirth }" name="mbirth"></td>
 			</tr>
 			<tr>
 			</tr>

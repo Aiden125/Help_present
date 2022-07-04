@@ -6,6 +6,7 @@ public class MemberDto {
 	private String mid;
 	private String mpw;
 	private String mname;
+	private String mphoto;
 	private Date mbirth;
 	private String mgender;
 	private String memail;
@@ -17,11 +18,12 @@ public class MemberDto {
 	public MemberDto() {
 	}
 
-	public MemberDto(String mid, String mpw, String mname, Date mbirth, String mgender, String memail, String mmbti,
-			Date mrdate, int mlike, int mwritecount) {
+	public MemberDto(String mid, String mpw, String mname, String mphoto, Date mbirth, String mgender, String memail,
+			String mmbti, Date mrdate, int mlike, int mwritecount) {
 		this.mid = mid;
 		this.mpw = mpw;
 		this.mname = mname;
+		this.mphoto = mphoto;
 		this.mbirth = mbirth;
 		this.mgender = mgender;
 		this.memail = memail;
@@ -30,6 +32,8 @@ public class MemberDto {
 		this.mlike = mlike;
 		this.mwritecount = mwritecount;
 	}
+
+
 
 	public String getMid() {
 		return mid;
@@ -110,11 +114,22 @@ public class MemberDto {
 	public void setMwritecount(int mwritecount) {
 		this.mwritecount = mwritecount;
 	}
+	
+
+	public String getMphoto() {
+		return mphoto;
+	}
+
+	public void setMphoto(String mphoto) {
+		this.mphoto = mphoto;
+	}
 
 	@Override
 	public String toString() {
-		return "MemberDto [mid=" + mid + ", mpw=" + mpw + ", mname=" + mname + ", mbirth=" + mbirth + ", mgender="
-				+ mgender + ", memail=" + memail + ", mmbti=" + mmbti + ", mrdate=" + mrdate + ", mlike=" + mlike
-				+ ", mwritecount=" + mwritecount + "]";
+		return "MemberDto [mid=" + mid + ", mpw=" + mpw + ", mname=" + mname + ", mphoto=" + mphoto + ", mbirth="
+				+ mbirth + ", mgender=" + mgender + ", memail=" + memail + ", mmbti=" + mmbti + ", mrdate=" + mrdate
+				+ ", mlike=" + mlike + ", mwritecount=" + mwritecount + "]";
 	}
+
+	
 }

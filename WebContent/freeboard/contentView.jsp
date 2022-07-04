@@ -147,6 +147,10 @@
 		</tr>
 		<tr>
 			<td colspan="8" style="text-align:right;">
+			<c:if test="${member.mid eq dtos.mid }">
+				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${dtos.bno }'">수정</button>
+				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${dtos.bno }'">삭제</button>
+			</c:if>
 			<c:if test="${member.mid != dtos.mid }">
 			<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${dtos.bno }'">답변작성</button>
 			</c:if>

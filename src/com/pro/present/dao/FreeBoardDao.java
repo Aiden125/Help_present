@@ -464,7 +464,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 12. 답글 몇개 달렸는지
+	// 12. 답글갯수
 	public int replyCount(int bgroup) {
 		int totCnt = 0;
 		Connection conn = null;

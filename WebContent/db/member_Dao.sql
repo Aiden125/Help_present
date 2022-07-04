@@ -10,8 +10,8 @@ SELECT * FROM MEMBER WHERE mID='aaa';
 SELECT * FROM MEMBER WHERE mID='aaa' AND mPW='1234';
 
 -- 4. 회원가입
-INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mEMAIL, mMBTI)
-    VALUES('aaa212', '1234', '홍길동1213', '1995-12-05', 'f','12113@12', 'INTJ');
+INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mEMAIL, mMBTI)
+    VALUES('aaa2121231', '1234', '1홍길동1213', 'kim.jpg', '1995-12-05', 'f','12113@11232', 'INTJ');
                     
 -- 5. 리스트 조회
 SELECT *
@@ -29,6 +29,7 @@ SELECT *
 -- 6. 회원정보수정
 UPDATE MEMBER SET mPW='1234',
                   mNAME='111',
+                  mPHOTO='gang.png',
                   mBIRTH='1995-12-05',
                   mGENDER='f',
                   mEMAIL='123@1222',
