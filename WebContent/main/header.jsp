@@ -32,7 +32,8 @@
                         <li class="nav-item"><a class="nav-link" href="${conPath }/logout.do">로그아웃</a></li>
                         <li class="nav-item"><a class="nav-link" href="${conPath }/modifyView.do">정보수정</a></li>
                         <li class="nav-item"><a class="nav-link" href="${conPath }/memberListView.do">회원목록</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${conPath }/requestListView.do?mid=${member.mid}">1:1질문</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${conPath }/requestListView.do?mid=${member.mid}">1:1한 질문</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="${conPath }/responseListView.do?mid=${member.mid}">1:1받은 질문</a></li>
                         </c:if>
                     </ul>
                 </div>

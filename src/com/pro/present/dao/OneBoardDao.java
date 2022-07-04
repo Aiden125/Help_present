@@ -97,7 +97,7 @@ public class OneBoardDao {
 					"                WHERE O.mID=M.mID AND obGETNAME=(SELECT mNAME FROM MEMBER WHERE mID=?) " + 
 					"                AND obBORN=0 AND obDELETEMARK=0 " + 
 					"                ORDER BY obGROUP DESC, obSTEP) A) " + 
-					"    WHERE RN BETWEEN 1 AND 3;";
+					"    WHERE RN BETWEEN ? AND ?";
 			try {
 				conn = ds.getConnection();
 				pstmt = conn.prepareStatement(sql);
@@ -200,7 +200,7 @@ public class OneBoardDao {
 	
 	
 	// 3. 일대일 게시판 질문쓰기
-	public int writeOneBoard(String mid, String obmbti, String obtitle, String obcontent, String obip, int obborn) {
+	public int writeOneBoard(String mid, String obtitle, String obcontent, String obip, String obgetname) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -213,7 +213,7 @@ public class OneBoardDao {
 			pstmt.setString(2, obtitle);
 			pstmt.setString(3, obcontent);
 			pstmt.setString(4, obip);
-			pstmt.setInt(5, obborn);
+			pstmt.setString(5, obgetname);
 			result = pstmt.executeUpdate();
 			MemberDao mDao = MemberDao.getInstance();
 			mDao.writecountUp(mid);
@@ -359,7 +359,7 @@ public class OneBoardDao {
 	}
 	
 	
-	// 9. 답변들 상세보기
+	// 7. 답변들 상세보기
 	public ArrayList<OneBoardDto> replyListView(int obgroup){
 		ArrayList<OneBoardDto> dtos = new ArrayList<OneBoardDto>();
 		Connection conn = null;
@@ -405,7 +405,7 @@ public class OneBoardDao {
 	}
 
 	
-	// 10. 글 수정
+	// 8. 글 수정
 	public int modify(int obno, String obtitle, String obcontent, String bip) {
 		int result = FAIL;
 		Connection conn = null;
@@ -435,7 +435,7 @@ public class OneBoardDao {
 		return result;
 	}
 	
-	// 11. 글 삭제
+	// 9. 글 삭제
 	public int delete(int obno) {
 		int result = FAIL;
 		Connection conn = null;

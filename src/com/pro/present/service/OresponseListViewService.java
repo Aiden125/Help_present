@@ -9,13 +9,12 @@ import com.pro.present.dao.MemberDao;
 import com.pro.present.dao.OneBoardDao;
 import com.pro.present.dto.MemberDto;
 
-public class OresponseListViewService2 implements Service {
+public class OresponseListViewService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// list.do 또는 list.do?pageNum=2 또는 list.do?pageNum=10
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("member");
+		String mid = request.getParameter("mid");
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null) {
 			pageNum="1";
@@ -24,21 +23,20 @@ public class OresponseListViewService2 implements Service {
 		final int PAGESIZE = 5, BLOCKSIZE = 10;
 		int startRow = (currentPage-1)*PAGESIZE+1;
 		int endRow = startRow + PAGESIZE -1;
-		
-		
 		OneBoardDao oDao = OneBoardDao.getInstance();
-		request.setAttribute("responseList", oDao.responseListBoard(member.getMid(), startRow, endRow)); // 글목록
-		int responseTotalCnt = oDao.requestTotalCnt(member.getMid());
-		int responsePageCnt = (int)Math.ceil((double) responseTotalCnt/PAGESIZE); // 페이지 갯수
-		int responseStartPage = ((currentPage-1)/BLOCKSIZE) * BLOCKSIZE +1;
-		int responseEndPage = responseStartPage + BLOCKSIZE -1;
-		if(responseEndPage > responsePageCnt) {
-			responseEndPage = responsePageCnt;
+		request.setAttribute("list", oDao.responseListBoard(mid, startRow, endRow)); // 글목록
+		int requestTotalCnt = oDao.responseTotalCnt(mid);
+		int requestPageCnt = (int)Math.ceil((double) requestTotalCnt/PAGESIZE); // 페이지 갯수
+		int requestStartPage = ((currentPage-1)/BLOCKSIZE) * BLOCKSIZE +1;
+		int requestEndPage = requestStartPage + BLOCKSIZE -1;
+		if(requestEndPage > requestPageCnt) {
+			requestEndPage = requestPageCnt;
 		}
+		request.setAttribute("mid", mid);
 		request.setAttribute("BLOCKSIZE", BLOCKSIZE); // ★ 페이지 관련 항목
-		request.setAttribute("startPage", responseStartPage);
-		request.setAttribute("endPage", responseEndPage);
+		request.setAttribute("startPage", requestStartPage);
+		request.setAttribute("endPage", requestEndPage);
 		request.setAttribute("pageNum", currentPage);
-		request.setAttribute("pageCnt", responsePageCnt);
+		request.setAttribute("pageCnt", requestPageCnt);
 	}
 }

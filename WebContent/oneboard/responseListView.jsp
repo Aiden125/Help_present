@@ -17,25 +17,13 @@
 	</script>
 </head>
 <body>
-<c:if test="${oWriteResult eq '질문등록 성공'}">
-	<script>
-		alert('${oWriteResult}');
-	</script>
-</c:if>
-<c:if test="${not empty oWriteResult && oWriteResult!= '질문등록 성공'}">
-	<script>
-		alert('${oWriteResult}');
-		history.back();
-	</script>
-</c:if>
-
 <jsp:include page="../main/header.jsp"/>
 	<table style="text-align:'center'">
-		<caption>내가 한 질문</caption>
+		<caption>내가 받은 질문</caption>
 		<tr>
-			<th>글번호</th><th colspan="4">글제목</th><th>상대방</th><th>작성일</th><th>답변여부</th>
+			<th>글번호</th><th colspan="4">글제목</th><th>질문 요청자</th><th>작성일</th><th>답변여부</th>
 			<c:if test="${list.size() eq 0 }">
-				<tr><td colspan="8">내가 한 질문이 없습니다.</td></tr>
+				<tr><td colspan="8">내가 받은 질문이 없습니다.</td></tr>
 			</c:if>
 			<c:if test="${list.size() != 0 }">
 				<c:forEach var="dto" items="${list }">
@@ -43,10 +31,10 @@
 						<td>${dto.obno }</td>
 						<!-- 글제목 -->
 						<td colspan="4">
-						<a href="${conPath }/oneBoardContentView.do?obno=${dto.obno}&obgroup=${dto.obgroup}">
+						<a href="#">
 						${dto.obtitle }</a>
 						</td> 
-						<td>${dto.obgetname }</td>
+						<td>${dto.mname }</td>
 						<td>${dto.obrdate }</td>
 						<td>${dto.obanswer }</td>
 					</tr>
@@ -57,18 +45,18 @@
 <!-- 페이징처리  -->
 	<div class="paging">
 		<c:if test="${startPage > BLOCKSIZE }">
-			[ <a href="${conPath }/requestListView.do?mid=${mid }&pageNum=${startPage-1 }">이전</a> ] &nbsp;
+			[ <a href="${conPath }/responseListView.do?mid=${mid }&pageNum=${startPage-1 }">이전</a> ] &nbsp;
 		</c:if>
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:if test="${i eq pageNum }">
 				[ <b> ${i } </b> ]
 			</c:if>
 			<c:if test="${i != pageNum }">
-				 [ <a href="${conPath }/requestListView.do?mid=${mid }&pageNum=${i}">${i }</a> ] 
+				 [ <a href="${conPath }/responseListView.do?mid=${mid }&pageNum=${i}">${i }</a> ] 
 			</c:if>
 		</c:forEach>
 		<c:if test="${endPage < pageCnt }">
-			 &nbsp; [ <a href="${conPath }/requestListView.do?mid=${mid }&pageNum=${endPage + 1 }">다음</a> ]
+			 &nbsp; [ <a href="${conPath }/responseListView.do?mid=${mid }&pageNum=${endPage + 1 }">다음</a> ]
 		</c:if>
 	</div>
 <jsp:include page="../main/footer.jsp"/>

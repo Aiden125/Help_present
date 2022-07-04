@@ -89,7 +89,7 @@
 			<tr style="margin:0 auto;">
 				<td colspan="8">
 					<textarea name=rcontent style="height:50px;" readonly="readonly">댓글 내용 : ${replys.rcontent }</textarea><br>
-					<p style="text-align:right;">작성자 : ${replys.mname }</p>
+					<p style="text-align:right;">작성자 : ${replys.mname } &nbsp; 작성일 : ${replys.rrdate }</p>
 				</td>
 			</tr>
 		</table>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pro.present.service.BlikeService;
 import com.pro.present.service.BwriteService;
+import com.pro.present.service.McontentViewService;
 import com.pro.present.service.BcontentViewService;
 import com.pro.present.service.BdeleteService;
 import com.pro.present.service.BlistViewService;
@@ -26,6 +27,8 @@ import com.pro.present.service.MlogoutService;
 import com.pro.present.service.MmodifyService;
 import com.pro.present.service.MmodifyViewService;
 import com.pro.present.service.OrequestListViewService;
+import com.pro.present.service.OresponseListViewService;
+import com.pro.present.service.OwriteService;
 import com.pro.present.service.RwriteService;
 import com.pro.present.service.Service;
 
@@ -147,7 +150,29 @@ public class MemberController extends HttpServlet {
 			service = new OrequestListViewService();
 			service.execute(request, response);
 			viewPage = "oneboard/requestListView.jsp";
+		}else if(command.equals("/responseListView.do")) {
+			service = new OresponseListViewService();
+			service.execute(request, response);
+			viewPage = "oneboard/responseListView.jsp";
+		}else if(command.equals("/memberContentView.do")) {
+			service = new McontentViewService();
+			service.execute(request, response);
+			viewPage = "member/contentView.jsp";
+		}else if(command.equals("/writeOneBoardView.do")) {
+			viewPage = "oneboard/writeView.jsp";
+		}else if(command.equals("/oneBoardWrite.do")) {
+			service = new OwriteService();
+			service.execute(request, response);
+			viewPage = "/requestListView.do";
+		}else if(command.equals("/oneBoardContentView.do")) {
+			service = new OcontentViewService();
+			service.execute(request, response);
+			viewPage = "oneboard/contentView.jsp";
 		}
+		
+		
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

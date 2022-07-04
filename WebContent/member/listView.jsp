@@ -25,7 +25,7 @@
 				<td>
 					${dto.mid}<br>
 					${dto.mpw}<br>
-					${dto.mname }<br>
+					<a href="${conPath }/memberContentView.do?mid=${dto.mid}">${dto.mname }</a><br>
 					(${dto.memail })<br>
 					(${dto.mbirth })<br>
 					<c:if test="${not empty dto.mmbti}">${dto.mmbti }</c:if>
