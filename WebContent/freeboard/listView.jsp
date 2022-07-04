@@ -81,7 +81,7 @@
 
 <jsp:include page="../main/header.jsp"/>
 	<table style="text-align:'center'">
-		<caption>게시판</caption>
+		<caption>자유 게시판</caption>
 		<tr>
 			<th>글번호</th><th>상대MBTI</th><th colspan="2">글제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 			<c:if test="${list.size() eq 0 }">

@@ -312,8 +312,51 @@ public class OneBoardDao {
 		return result;
 	}
 	
+	// 6-1. 글상관없이 하나만 상세보기
+	public OneBoardDto contentViewOnlyOne(int obno) {
+		OneBoardDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT O.*, M.mNAME " + 
+				"        FROM ONEBOARD O, MEMBER M " + 
+				"        WHERE O.mID=M.mID AND obDELETEMARK=0 AND obno=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, obno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				// int obno = rs.getInt("obno");
+				String mid = rs.getString("mid");
+				String obtitle = rs.getString("obtitle");
+				String obcontent = rs.getString("obcontent");
+				Date obrdate = rs.getDate("obrdate");
+				int obgroup = rs.getInt("obgroup");
+				int obstep = rs.getInt("obstep");
+				String obip = rs.getString("obip");
+				int obdeletemark = rs.getInt("obdeletemark");
+				String obgetname = rs.getString("obgetname");
+				int obborn = rs.getInt("obborn");
+				String obanswer = rs.getString("obanswer");
+				String mname = rs.getString("mname");
+				dto = new OneBoardDto(obno, mid, obtitle, obcontent, obrdate, obgroup, obstep, obip, obdeletemark, obgetname, obborn, obanswer, mname);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+				if(rs!=null) rs.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dto;
+	}
 	
-	// 6. 질문 글 상세보기
+	// 6-2 원글만 상세보기
 	public OneBoardDto contentView(int obno, int obgroup) {
 		OneBoardDto dto = null;
 		Connection conn = null;
@@ -325,8 +368,7 @@ public class OneBoardDao {
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, obno);
-			pstmt.setInt(2, obgroup);
+			pstmt.setInt(1, obgroup);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				// int obno = rs.getInt("obno");
@@ -368,7 +410,7 @@ public class OneBoardDao {
 		String sql = "SELECT O.*, M.mNAME " + 
 				"        FROM ONEBOARD O, MEMBER M " + 
 				"        WHERE O.mID=M.mID AND obDELETEMARK=0 AND obGROUP=? AND obBORN!=0 " + 
-				"        ORDER BY obSTEP, obRDATE";
+				"        ORDER BY obRDATE";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -406,20 +448,20 @@ public class OneBoardDao {
 
 	
 	// 8. 글 수정
-	public int modify(int obno, String obtitle, String obcontent, String bip) {
+	public int modify(int obno, String obtitle, String obcontent, String obip) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE ONEBOARD SET obTITLE='수정 제목', " + 
-				"                     obCONTENT='수정 본문', " + 
-				"                     obIP='123.123.123.111' " + 
-				"            WHERE obNO=2";
+		String sql = "UPDATE ONEBOARD SET obTITLE=?, " + 
+				"                     obCONTENT=?, " + 
+				"                     obIP=? " + 
+				"            WHERE obNO=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, obtitle);
 			pstmt.setString(2, obcontent);
-			pstmt.setString(3, bip);
+			pstmt.setString(3, obip);
 			pstmt.setInt(4, obno);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

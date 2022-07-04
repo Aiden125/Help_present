@@ -2,17 +2,19 @@ package com.pro.present.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pro.present.dao.OneBoardDao;
+import com.pro.present.dto.MemberDto;
+import com.pro.present.dto.OneBoardDto;
 
-public class OcontentViewService implements Service {
+public class OmodifyViewService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int obno = Integer.parseInt(request.getParameter("obno"));
-		int obgroup = Integer.parseInt(request.getParameter("obgroup"));
 		OneBoardDao oDao = OneBoardDao.getInstance();
-		request.setAttribute("oContentView", oDao.contentView(obno, obgroup));
-		request.setAttribute("answerList", oDao.replyListView(obgroup));
+		OneBoardDto dto = oDao.contentViewOnlyOne(obno);
+		request.setAttribute("dto", dto);
 	}
 }

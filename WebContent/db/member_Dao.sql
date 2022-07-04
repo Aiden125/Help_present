@@ -11,7 +11,7 @@ SELECT * FROM MEMBER WHERE mID='aaa' AND mPW='1234';
 
 -- 4. 회원가입
 INSERT INTO MEMBER(mID, mPW, mNAME, mBIRTH, mGENDER, mEMAIL, mMBTI)
-    VALUES('aaa21', '1234', '홍길동121', '1995-12-05', 'f','1213@12', 'INTJ');
+    VALUES('aaa212', '1234', '홍길동1213', '1995-12-05', 'f','12113@12', 'INTJ');
                     
 -- 5. 리스트 조회
 SELECT *
@@ -262,8 +262,8 @@ SELECT O.*, M.mNAME
 -- 6-2. 답변들 상세보기
 SELECT O.*, M.mNAME
         FROM ONEBOARD O, MEMBER M
-        WHERE O.mID=M.mID AND obDELETEMARK=0 AND obGROUP=1 AND obBORN!=0
-        ORDER BY obSTEP, obRDATE;
+        WHERE O.mID=M.mID AND obDELETEMARK=0 AND obGROUP=49 AND obBORN!=0
+        ORDER BY obRDATE;
 
 -- 9. 글 수정하기
 UPDATE ONEBOARD SET obTITLE='수정 제목',
@@ -276,6 +276,6 @@ UPDATE ONEBOARD SET obDELETEMARK = 1 WHERE obNO=5;
 
 SELECT * FROM FREEBOARD;
 
-
+SELECT * FROM MEMBER;
 COMMIT;
 

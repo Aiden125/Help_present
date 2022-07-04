@@ -26,6 +26,13 @@ import com.pro.present.service.MloginService;
 import com.pro.present.service.MlogoutService;
 import com.pro.present.service.MmodifyService;
 import com.pro.present.service.MmodifyViewService;
+import com.pro.present.service.OcontentViewService;
+import com.pro.present.service.OdeleteService;
+import com.pro.present.service.OmodifyService;
+import com.pro.present.service.OmodifyViewService;
+import com.pro.present.service.OreplyListViewService;
+import com.pro.present.service.OreplyService;
+import com.pro.present.service.OreplyViewService;
 import com.pro.present.service.OrequestListViewService;
 import com.pro.present.service.OresponseListViewService;
 import com.pro.present.service.OwriteService;
@@ -168,11 +175,31 @@ public class MemberController extends HttpServlet {
 			service = new OcontentViewService();
 			service.execute(request, response);
 			viewPage = "oneboard/contentView.jsp";
+		}else if(command.equals("/oneBoardReplyView.do")) {
+			service = new OreplyViewService();
+			service.execute(request, response);
+			viewPage = "oneboard/replyView.jsp";
+		}else if(command.equals("/oneBoardReply.do")) {
+			service = new OreplyService();
+			service.execute(request, response);
+			viewPage = "/responseListView.do";
+		}else if(command.equals("/oneBoardReplyList.do")) {
+			service = new OreplyListViewService();
+			service.execute(request, response);
+			viewPage = "/responseListView.do";
+		}else if(command.equals("/oneBoardModifyView.do")) {
+			service = new OmodifyViewService();
+			service.execute(request, response);
+			viewPage = "/oneboard/modifyView.jsp";
+		}else if(command.equals("/oneBoardModify.do")) {
+			service = new OmodifyService();
+			service.execute(request, response);
+			viewPage = "/oneBoardContentView.do";
+		}else if(command.equals("/oneBoardDelete.do")) {
+			service = new OdeleteService();
+			service.execute(request, response);
+			viewPage = "/oneBoardContentView.do";
 		}
-		
-		
-		
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

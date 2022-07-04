@@ -17,6 +17,20 @@
 	</script>
 </head>
 <body>
+<c:if test="${oReplyResult eq '답변작성 성공'}">
+	<script>
+		alert('${oReplyResult}');
+	</script>
+</c:if>
+<c:if test="${not empty oReplyResult && oReplyResult!= '답변작성 성공'}">
+	<script>
+		alert('${oReplyResult}');
+		history.back();
+	</script>
+</c:if>
+
+
+
 <jsp:include page="../main/header.jsp"/>
 	<table style="text-align:'center'">
 		<caption>내가 받은 질문</caption>
@@ -31,7 +45,7 @@
 						<td>${dto.obno }</td>
 						<!-- 글제목 -->
 						<td colspan="4">
-						<a href="#">
+						<a href="${conPath }/oneBoardContentView.do?obno=${dto.obno}&obgroup=${dto.obgroup}">
 						${dto.obtitle }</a>
 						</td> 
 						<td>${dto.mname }</td>

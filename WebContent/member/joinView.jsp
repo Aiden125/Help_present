@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<th>나의 MBTI</th>
-				<td><input type="text" name="mbti"></td>
+				<td><input type="text" name="mmbti"></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
