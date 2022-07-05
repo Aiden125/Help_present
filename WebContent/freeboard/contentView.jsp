@@ -71,8 +71,8 @@
 		<tr>
 			<td colspan="2" style="text-align:left;">
 			<c:if test="${member.mid != null}">
+			<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 : ${freeBoard.blike }</a>
 			</c:if>
-			<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}'>좋아요 : ${freeBoard.blike }</a>
 			</td>
 			<td colspan="6" style="text-align:right;">
 			<c:if test="${member.mid eq freeBoard.mid }">

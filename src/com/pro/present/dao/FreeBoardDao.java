@@ -302,7 +302,7 @@ public class FreeBoardDao {
 	
 	
 	
-	// 7-1. 조회수 올리기
+	// 7-0. 조회수 올리기
 	private void hitUp(int bno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -323,12 +323,56 @@ public class FreeBoardDao {
 			}
 		}
 	}
+	// 7-1. 조회수 올리기
+	public void hitDown(int bno) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE FREEBOARD SET bHIT = bHIT-1 WHERE bNO=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+		
+		
 	
 	// 7-2. 좋아요 올리기
 	public void bLikeUp(int bno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE FREEBOARD SET bLIKE = bLIKE+1 WHERE bNO=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	// 7-3. 좋아요 올리기
+	public void bLikeDown(int bno) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE FREEBOARD SET bLIKE = bLIKE-1 WHERE bNO=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);

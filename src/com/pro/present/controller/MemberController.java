@@ -220,6 +220,7 @@ public class MemberController extends HttpServlet {
 			service.execute(request, response);
 			viewPage = "/memberListView.do";
 		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
