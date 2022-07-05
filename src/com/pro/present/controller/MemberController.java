@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.pro.present.service.BlikeService;
 import com.pro.present.service.BwriteService;
 import com.pro.present.service.McontentViewService;
+import com.pro.present.service.MemailCheckService;
+import com.pro.present.service.MnameCheckService;
+import com.pro.present.service.MidCheckService;
 import com.pro.present.service.BcontentViewService;
 import com.pro.present.service.BdeleteService;
 import com.pro.present.service.BlistViewService;
@@ -21,6 +24,7 @@ import com.pro.present.service.BreplyListViewService;
 import com.pro.present.service.BreplyService;
 import com.pro.present.service.BreplyViewService;
 import com.pro.present.service.MjoinService;
+import com.pro.present.service.MlikeService;
 import com.pro.present.service.MlistViewService;
 import com.pro.present.service.MloginService;
 import com.pro.present.service.MlogoutService;
@@ -199,6 +203,22 @@ public class MemberController extends HttpServlet {
 			service = new OdeleteService();
 			service.execute(request, response);
 			viewPage = "/oneBoardContentView.do";
+		}else if(command.equals("/idCheck.do")) {
+			service = new MidCheckService();
+			service.execute(request, response);
+			viewPage = "member/idCheck.jsp";
+		}else if(command.equals("/nameCheck.do")) {
+			service = new MnameCheckService();
+			service.execute(request, response);
+			viewPage = "member/nameCheck.jsp";
+		}else if(command.equals("/emailCheck.do")) {
+			service = new MemailCheckService();
+			service.execute(request, response);
+			viewPage = "member/emailCheck.jsp";
+		}else if(command.equals("/mlike.do")) {
+			service = new MlikeService();
+			service.execute(request, response);
+			viewPage = "/memberListView.do";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

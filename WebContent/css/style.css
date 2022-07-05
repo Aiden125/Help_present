@@ -2,12 +2,25 @@
 body { 
 	font-size: 9pt;
 }
-table {border: 2px solid lightgray; width:80%;
-margin: 40px auto; margin-bottom:80px; padding:100px;}
-table tr { background-color: ; height: 40px;}
-table tr:hover { background-color:
+#800wrap{
+	width:800px;
+	margin:0 auto;
+	border:1px solid red;
 }
-td, th {text-align: center; padding:20px; border:1px solid red;
+.800wrap{
+	width:800px;
+	margin:0 auto;
+	border:1px solid red;
+}
+#wrap_big{
+	width:1200px;
+	margin:0 auto;
+	border:1px solid red;
+}
+table {border: 2px solid lightgray; width:95%;
+margin: 0px auto; margin-bottom:0px; padding:0px;}
+
+td, th {text-align: center; padding:20px;
 margin:50px auto;}
 td{
 	border:1px solid red;
@@ -33,3 +46,4 @@ p {text-align: center;}
 	text-align:center;
 	background-color:gray;
 }
+

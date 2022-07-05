@@ -16,15 +16,17 @@ public class FreeBoardDto {
 	private int bindent;
 	private int blike;
 	private String bip;
-	private int banswercount;
 	private int bdeletemark;
 	private String mname;
 	private String mmbti;
+	private int replycount;
+	
 	public FreeBoardDto() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public FreeBoardDto(int bno, String mid, String bmbti, String btitle, String bcontent, String bfilename,
-			Date brdate, int bhit, int bgroup, int bstep, int bindent, int blike, String bip, int banswercount,
+			Date brdate, int bhit, int bgroup, int bstep, int bindent, int blike, String bip,
 			int bdeletemark) {
 		this.bno = bno;
 		this.mid = mid;
@@ -39,11 +41,10 @@ public class FreeBoardDto {
 		this.bindent = bindent;
 		this.blike = blike;
 		this.bip = bip;
-		this.banswercount = banswercount;
 		this.bdeletemark = bdeletemark;
 	}
 	public FreeBoardDto(int bno, String mid, String bmbti, String btitle, String bcontent, String bfilename,
-			Date brdate, int bhit, int bgroup, int bstep, int bindent, int blike, String bip, int banswercount,
+			Date brdate, int bhit, int bgroup, int bstep, int bindent, int blike, String bip,
 			int bdeletemark, String mname, String mmbti) {
 		this.bno = bno;
 		this.mid = mid;
@@ -58,11 +59,44 @@ public class FreeBoardDto {
 		this.bindent = bindent;
 		this.blike = blike;
 		this.bip = bip;
-		this.banswercount = banswercount;
 		this.bdeletemark = bdeletemark;
 		this.mname = mname;
 		this.mmbti = mmbti;
 	}
+	
+	
+
+	public FreeBoardDto(int bno, String mid, String bmbti, String btitle, String bcontent, String bfilename,
+			Date brdate, int bhit, int bgroup, int bstep, int bindent, int blike, String bip, int bdeletemark,
+			String mname, String mmbti, int replycount) {
+		this.bno = bno;
+		this.mid = mid;
+		this.bmbti = bmbti;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfilename = bfilename;
+		this.brdate = brdate;
+		this.bhit = bhit;
+		this.bgroup = bgroup;
+		this.bstep = bstep;
+		this.bindent = bindent;
+		this.blike = blike;
+		this.bip = bip;
+		this.bdeletemark = bdeletemark;
+		this.mname = mname;
+		this.mmbti = mmbti;
+		this.replycount = replycount;
+	}
+	
+	
+	public int getReplycount() {
+		return replycount;
+	}
+
+	public void setReplycount(int replycount) {
+		this.replycount = replycount;
+	}
+
 	public int getBno() {
 		return bno;
 	}
@@ -141,12 +175,6 @@ public class FreeBoardDto {
 	public void setBip(String bip) {
 		this.bip = bip;
 	}
-	public int getBanswercount() {
-		return banswercount;
-	}
-	public void setBanswercount(int banswercount) {
-		this.banswercount = banswercount;
-	}
 	public int getBdeletemark() {
 		return bdeletemark;
 	}
@@ -165,12 +193,13 @@ public class FreeBoardDto {
 	public void setMmbti(String mmbti) {
 		this.mmbti = mmbti;
 	}
+
 	@Override
 	public String toString() {
 		return "FreeBoardDto [bno=" + bno + ", mid=" + mid + ", bmbti=" + bmbti + ", btitle=" + btitle + ", bcontent="
 				+ bcontent + ", bfilename=" + bfilename + ", brdate=" + brdate + ", bhit=" + bhit + ", bgroup=" + bgroup
-				+ ", bstep=" + bstep + ", bindent=" + bindent + ", blike=" + blike + ", bip=" + bip + ", banswercount="
-				+ banswercount + ", bdeletemark=" + bdeletemark + ", mname=" + mname + ", mmbti=" + mmbti + "]";
+				+ ", bstep=" + bstep + ", bindent=" + bindent + ", blike=" + blike + ", bip=" + bip + ", bdeletemark="
+				+ bdeletemark + ", mname=" + mname + ", mmbti=" + mmbti + "]";
 	}
 	
 	

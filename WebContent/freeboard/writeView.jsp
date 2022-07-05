@@ -33,15 +33,36 @@
 			<td><input type="text" name="btitle" required="required"></td>
 		</tr>
 		<tr>
-			<td>상대방 MBTI</td>
-			<td><input type="text" name="bmbti"></td>
+			<td>선물 받을 분의 MBTI</td>
+			<td>
+				<select name="bmbti" style="width:300px;">
+					<option value="none">선택</option>
+					<option>ENTP</option>
+					<option>ENTJ</option>
+					<option>ENFP</option>
+					<option>ENFJ</option>
+					<option>ESTP</option>
+					<option>ESTJ</option>
+					<option>ESFP</option>
+					<option>ESFJ</option>
+					
+					<option>INTP</option>
+					<option>INTJ</option>
+					<option>INFP</option>
+					<option>INFJ</option>
+					<option>ISTP</option>
+					<option>ISTJ</option>
+					<option>ISFP</option>
+					<option>ISFJ</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
-			<td>본문</td>
+			<td>내용</td>
 			<td><textarea name="bcontent" required="required" style="height:200px;"></textarea></td>
 		</tr>
 		<tr>
-			<td>첨부파일</td>
+			<td>사진첨부</td>
 			<td><input type="file" name="bfilename" ></td>
 		</tr>
 		<tr>

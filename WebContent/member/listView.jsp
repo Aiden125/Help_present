@@ -31,9 +31,9 @@
 					(${dto.mbirth })<br>					
 					<c:if test="${not empty dto.mmbti}">${dto.mmbti }</c:if>
 					<c:if test="${empty dto.mmbti}">미등록</c:if><br>
-					(${dto.mrdate })<br>
-					(${dto.mlike })<br>
-					(${dto.mwritecount })
+					가입 날짜 : ${dto.mrdate }<br>
+					<a href="${conPath}/mlike.do?mid=${dto.mid}">추천수</a> : ${dto.mlike }<br>
+					글 쓴 갯수 : ${dto.mwritecount }
 				</td>
 			</c:forEach>
 		</tr>

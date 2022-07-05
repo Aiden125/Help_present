@@ -7,3 +7,4 @@ Servers/
 .metadata/
 .classpath/
 .project/
+/build/

@@ -34,8 +34,70 @@ public class MemberDao {
 		} 
 	}
 	
+	// 0. 닉네임 중복체크
+	public int checkName(String mname) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM  MEMBER WHERE mNAME=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mname);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = FAIL;
+			}else {
+				result = SUCCESS;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 	
-	// 1. 로그인 중복체크
+	// 0. 이메일 중복체크
+	public int checkEmail(String memail) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM  MEMBER WHERE memail=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memail);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = FAIL;
+			}else {
+				result = SUCCESS;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+		
+		
+	// 1. 아이디 중복체크
 	public int checkId(String mid) {
 		int result = FAIL;
 		Connection conn = null;

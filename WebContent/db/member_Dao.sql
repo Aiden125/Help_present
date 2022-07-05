@@ -1,5 +1,11 @@
 -- MEMBER DAO 구성하기
 
+-- 0. 닉네임 조회
+SELECT * FROM  MEMBER WHERE mNAME='홍길동';
+
+-- 0. 이메일 조회
+SELECT * FROM  MEMBER WHERE memail='123@123.com';
+
 -- 1. 로그인 중복체크
 SELECT * FROM MEMBER WHERE mID='aaa';
 
@@ -69,27 +75,38 @@ COMMIT;
 
 -- FREEBOARD DAO 구성하기
 
+
+
 -- 1. 글목록
-SELECT B.*, M.mNAME
+SELECT B.*, M.mNAME, (SELECT COUNT(*) FROM REPLY WHERE bNO=B.bNO) REPLYCOUNT
     FROM FREEBOARD B, MEMBER M
-    WHERE B.mID=M.mID
+    WHERE B.mID=M.mID AND bDELETEMARK=0
     ORDER BY bGROUP DESC, bSTEP;
 
 SELECT *
     FROM (SELECT ROWNUM RN, A.*
-        FROM(SELECT B.*, M.mNAME, M.mMBTI
-                FROM FREEBOARD B, MEMBER M
-                WHERE B.mID=M.mID AND bDELETEMARK=0
-                ORDER BY bGROUP DESC, bSTEP) A)
-    WHERE RN BETWEEN 2 AND 3;
+        FROM(SELECT B.*, M.mNAME, (SELECT COUNT(*) FROM REPLY WHERE bNO=B.bNO) REPLYCOUNT
+    FROM FREEBOARD B, MEMBER M
+    WHERE B.mID=M.mID AND bDELETEMARK=0
+    AND (bMBTI LIKE '%'||UPPER('intj')||'%' OR b.BTITLE LIKE '%'||UPPER('intj')||'%'
+    OR bCONTENT LIKE '%'||UPPER('intj')||'%' OR M.mNAME LIKE '%'||UPPER('intj')||'%')
+    ORDER BY bGROUP DESC, bSTEP) A)
+    WHERE RN BETWEEN 1 AND 1000;
 
 -- 2. 등록된 글 수
-SELECT COUNT(*) FROM FREEBOARD WHERE bDELETEMARK=0;
+SELECT COUNT(*) FROM FREEBOARD;
+
+-- 2-2. 검색된 글 수
+SELECT COUNT(*)
+    FROM FREEBOARD B, MEMBER M
+    WHERE B.mID=M.mID AND bDELETEMARK=0
+        AND (bMBTI LIKE '%'||UPPER('intj')||'%' OR b.BTITLE LIKE '%'||UPPER('intj')||'%'
+        OR bCONTENT LIKE '%'||UPPER('intj')||'%' OR M.mNAME LIKE '%'||UPPER('intj')||'%');
 
 -- 3. 원글쓰기
 INSERT INTO FREEBOARD(bNO, mID, bMBTI, bTITLE, bCONTENT, bFILENAME,
                 bGROUP, bSTEP, bINDENT, bIP)
-        VALUES(FREEBOARD_SEQ.NEXTVAL, 'ddd', 'INTJ', 'title', 'content', 'filename',
+        VALUES(FREEBOARD_SEQ.NEXTVAL, 'ddd', UPPER('intj'), 'title', 'content', 'filename',
                 FREEBOARD_SEQ.CURRVAL, 0, 0, '123.123.123.123');
 
 -- 4. 답변글 쓰기전 스텝
@@ -279,4 +296,6 @@ SELECT * FROM FREEBOARD;
 
 SELECT * FROM MEMBER;
 COMMIT;
+
+
 

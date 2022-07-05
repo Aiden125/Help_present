@@ -11,16 +11,22 @@ public class BlistViewService implements Service {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// list.do 또는 list.do?pageNum=2 또는 list.do?pageNum=10
 		String pageNum = request.getParameter("pageNum");
+		String word = request.getParameter("word");
 		if(pageNum == null) {
 			pageNum="1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE = 5, BLOCKSIZE = 10;
+		final int PAGESIZE = 10, BLOCKSIZE = 10;
 		int startRow = (currentPage-1)*PAGESIZE+1;
 		int endRow = startRow + PAGESIZE -1;
 		FreeBoardDao bDao = FreeBoardDao.getInstance();
-		request.setAttribute("list", bDao.listBoard(startRow, endRow)); // 글목록
-		int totalCnt = bDao.getBoardTotalCnt(); // 등록된 글 갯수
+		request.setAttribute("list", bDao.listBoard(word, startRow, endRow)); // 글목록
+		int totalCnt=0;
+		if(word==null) {
+			totalCnt = bDao.getBoardTotalCnt();
+		}else {
+			totalCnt = bDao.getBoardSearchCnt(word); // 등록된 글 갯수			
+		}
 		int pageCnt = (int)Math.ceil((double) totalCnt/PAGESIZE); // 페이지 갯수
 		int startPage = ((currentPage-1)/BLOCKSIZE) * BLOCKSIZE +1;
 		int endPage = startPage + BLOCKSIZE -1;

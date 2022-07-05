@@ -1,3 +1,6 @@
+DROP TABLE LIKE_TABLE;
+DROP SEQUENCE LIKE_TABLE_SEQ;
+
 DROP SEQUENCE ONEBOARD_SEQ;
 DROP TABLE ONEBOARD;
 DROP SEQUENCE REPLY_SEQ;
@@ -24,17 +27,17 @@ CREATE TABLE MEMBER(
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
     VALUES('moan1', '1234', '문희석', 'gico.jpg', '1995-12-05', 'm', 'INTJ', 'moan11@moan.com');
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('aaa1', '1234', '홍길동12', 'kang.jpg', '1995-12-05', 'm', 'ENTP', 'moan12@moan.com');
+    VALUES('aaa', '1234', '홍길동12', 'kang.jpg', '1995-12-05', 'm', 'ENTP', 'moan12@moan.com');
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('bbb1', '1234', '홍길동23', 'jo.jpg', '1995-12-05', 'm', 'ISFJ', 'moan23@moan.com');
+    VALUES('bbb', '1234', '홍길동23', 'jo.jpg', '1995-12-05', 'm', 'ISFJ', 'moan23@moan.com');
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('ccc1', '1234', '홍길동33', 's.jpg', '1995-12-05', 'm', 'INFP', 'moan34@moan.com');
+    VALUES('ccc', '1234', '홍길동33', 's.jpg', '1995-12-05', 'm', 'INFP', 'moan34@moan.com');
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('ddd1', '1234', '홍길동43', 'go.jpg', '1995-12-05', 'm', 'ENTJ', 'moan45@moan.com');
+    VALUES('ddd', '1234', '홍길동43', 'go.jpg', '1995-12-05', 'm', 'ENTJ', 'moan45@moan.com');
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('eee1', '1234', '홍길동53', 'lee.jpg', '1995-12-05', 'm', 'ENFP', 'moan56@moan.com');
+    VALUES('eee', '1234', '홍길동53', 'lee.jpg', '1995-12-05', 'm', 'ENFP', 'moan56@moan.com');
 INSERT INTO MEMBER(mID, mPW, mNAME, mPHOTO, mBIRTH, mGENDER, mMBTI, mEMAIL)
-    VALUES('fff1', '1234', '홍길동63', 'lee.jpg', '1995-12-05', 'm', 'ESFJ', 'moan67@moan.com');
+    VALUES('fff', '1234', '홍길동63', 'lee.jpg', '1995-12-05', 'm', 'ESFJ', 'moan67@moan.com');
     
 
 SELECT * FROM MEMBER;
@@ -55,7 +58,6 @@ CREATE TABLE FREEBOARD(
     bINDENT NUMBER(6) NOT NULL,
     bLIKE NUMBER(6) DEFAULT 0 NOT NULL,
     bIP VARCHAR2(30) NOT NULL,
-    bANSWERCOUNT NUMBER(6) DEFAULT 0 NOT NULL,
     bDELETEMARK NUMBER(2) DEFAULT 0 NOT NULL
 );
 
@@ -163,11 +165,23 @@ INSERT INTO ONEBOARD(obNO, mID, obTITLE, obCONTENT, obGROUP, obSTEP, ObIP, obGET
 
 
 
+-- 좋아요 게시판
+CREATE TABLE LIKE_TABLE(
+    LIKENO NUMBER(6) PRIMARY KEY,
+    mID VARCHAR2(30) REFERENCES MEMBER(mID),
+    bNO NUMBER(6) REFERENCES FREEBOARD(bNO),
+    LIKECHECK NUMBER(2) DEFAULT 0
+);
+
+CREATE SEQUENCE LIKE_TABLE_SEQ
+    MAXVALUE 999999 NOCACHE NOCYCLE;
+
+
 SELECT * FROM MEMBER;
 SELECT * FROM FREEBOARD;
 SELECT * FROM REPLY;
 SELECT * FROM ONEBOARD;
-
+COMMIT;
 
 
 

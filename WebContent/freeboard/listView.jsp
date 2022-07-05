@@ -15,6 +15,16 @@
 			
 		});
 	</script>
+	<!-- MBTI 필터링
+		<script>
+		function change(){
+			var searchMbti = document.getElementById("searchMbti");
+			
+			var mbtiValue = searchMbti.options[searchMbti.selectedIndex].value;
+			location.href='${conPath}/freeBoardListView.do?mbtiValue='+mbtiValue;
+		}
+		</script>
+	-->
 
 <!-- 로그인 결과 -->
 <c:if test="${not empty loginErrorMsg }">
@@ -76,12 +86,50 @@
 	</script>
 </c:if>
 
+<script>
+	function search(){
+		var word = frm.word.value;
+		location.href = '${conPath}/freeBoardListView.do?word='+word;
+	}
+	</script>
 </head>
 <body>
 
 <jsp:include page="../main/header.jsp"/>
+
+<!-- MBTI 필터링 -->
+<!--
+<div>
+MBTI로 검색<select name="searchMbti" id="searchMbti" onchange="change()">
+			<option value="">선택</option>
+			<option>ENTP</option>
+			<option>ENTJ</option>
+			<option>ENFP</option>
+			<option>ENFJ</option>
+			<option>ESTP</option>
+			<option>ESTJ</option>
+			<option>ESFP</option>
+			<option>ESFJ</option>
+			
+			<option>INTP</option>
+			<option>INTJ</option>
+			<option>INFP</option>
+			<option>INFJ</option>
+			<option>ISTP</option>
+			<option>ISTJ</option>
+			<option>ISFP</option>
+			<option>ISFJ</option>
+		</select>
+</div>
+-->
+<div id="wrap_big">
+	<form action="#" name="frm" class="btn">
+		<div id=nav style="text-align:right;">
+			<input type="text" name="word" value="${param.word }">
+			<input type="button" onclick="search()" value="검색">
+		</div>
+	</form>
 	<table style="text-align:'center'">
-		<caption>자유 게시판</caption>
 		<tr>
 			<th>글번호</th><th>상대MBTI</th><th colspan="2">글제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 			<c:if test="${list.size() eq 0 }">
@@ -106,7 +154,7 @@
 								</c:if>
 							</c:forEach>
 							<a href="${conPath }/freeBoardContentView.do?bno=${dto.bno }&pageNum=${pageNum }&bgroup=${dto.bgroup}&bindent=${dto.bindent}">
-							${dto.btitle }[${dto.banswercount }]</a>
+							${dto.btitle }[${dto.replycount }]</a>
 							
 							<!-- 조회수 10이상이면 * 넣기 -->
 							<c:if test="${dto.bhit >= 10 }">
@@ -120,6 +168,7 @@
 				</c:forEach>
 			</c:if>
 		</tr>
+		
 		<tr>
 			<td colspan="7">
 				<a class="btn btn-primary" href="${conPath }/freeBoardWriteView.do">글쓰기</a>
@@ -130,14 +179,14 @@
 <!-- 페이징처리  -->
 	<div class="paging">
 		<c:if test="${startPage > BLOCKSIZE }">
-			[ <a href="${conPath }/freeBoardListView.do?pageNum=${startPage-1 }">이전</a> ] &nbsp;
+			[ <a href="${conPath }/freeBoardListView.do?word=${param.word }&pageNum=${startPage-1 }">이전</a> ] &nbsp;
 		</c:if>
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:if test="${i eq pageNum }">
 				[ <b> ${i } </b> ]
 			</c:if>
 			<c:if test="${i != pageNum }">
-				 [ <a href="${conPath }/freeBoardListView.do?pageNum=${i}">${i }</a> ] 
+				 [ <a href="${conPath }/freeBoardListView.do?word=${param.word }&pageNum=${i}">${i }</a> ] 
 			</c:if>
 		</c:forEach>
 			<%--
@@ -146,9 +195,10 @@
 			</c:if>
 			--%>
 		<c:if test="${endPage < pageCnt }">
-			 &nbsp; [ <a href="${conPath }/freeBoardListView.do?pageNum=${endPage + 1 }">다음</a> ]
+			 &nbsp; [ <a href="${conPath }/freeBoardListView.do?word=${param.word }&pageNum=${endPage + 1 }">다음</a> ]
 		</c:if>
 	</div>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
