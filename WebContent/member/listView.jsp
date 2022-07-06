@@ -62,8 +62,11 @@
 						<c:if test="${empty member || member.mid == dto.mid}">
 							추천수
 						</c:if>
-						<c:if test="${not empty member && member.mid != dto.mid}">
+						<c:if test="${not empty member && member.mid != dto.mid && param.pageNum eq null}">
 							<a href="${conPath}/mlike.do?mid=${dto.mid}&mmyid=${member.mid}">추천수</a>
+						</c:if>
+						<c:if test="${not empty member && member.mid != dto.mid && $param.pageNum != 0}">
+							<a href="${conPath}/mlike.do?mid=${dto.mid}&mmyid=${member.mid}&pageNum=${param.pageNum }">추천수</a>
 						</c:if>
 						<br>${dto.mlike }
 					</td>

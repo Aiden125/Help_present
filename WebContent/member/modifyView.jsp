@@ -25,56 +25,66 @@
 </c:if>
 
 <jsp:include page="../main/header.jsp"/>
+<div id="mini_wrap">
 	<form action="${conPath }/modify.do" name="join_frm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="dbmphoto" value="${member.mphoto }">
 		<table class="join_table">
 			<caption>정보수정</caption>
 			<tr>
-				<th>아이디</th>
-				<td colspan="2"><input type="text" name="mid" value="${member.mid }" readonly="readonly"></td>
+				<td colspan="2">
+					<img src="${conPath }/memberPhotoUp/${member.mphoto}" alt="나의 등록사진" width="150px">
+				</td>
 			</tr>
 			<tr>
-				<th>비밀번호</th>
-				<td colspan="2"><input type="password" name="mpw" required="required"></td>
+				<td colspan="2"><p class="left">프로필 사진수정</p>
+				<input type="file" class="box" name="mphoto"></td>
 			</tr>
 			<tr>
-				<th>닉네임</th>
-				<td colspan="2"><input type="text" name="mname" value="${member.mname }" required="required"></td>
+				<td colspan="2"><p class="left">아이디</p>
+				<input type="text" name="mid" class="box readonly" value="${member.mid }" readonly="readonly"></td>
 			</tr>
 			<tr>
-				<th>나의 MBTI</th>
-				<td colspan="2"><input type="text" value="${member.mmbti }" name="mmbti"></td>
+				<td colspan="2"><p class="left">비밀번호</p>
+				<input type="password" name="mpw" class="box" required="required"></td>
 			</tr>
 			<tr>
-				<th>이메일</th>
-				<td colspan="2"><input type="text" name="memail" value="${member.memail }" required="required"></td>
+				<td colspan="2"><p class="left">닉네임</p>
+				<input type="text" name="mname" class="box" value="${member.mname }" required="required"></td>
 			</tr>
 			<tr>
-				<th>사진</th>
-				<td colspan="2" ><img src="${conPath }/memberPhotoUp/${member.mphoto}" alt="나의 등록사진" width="150px"><input type="file" name="mphoto"></td>
+				<td colspan="2"><p class="left">나의MBTI</p>
+				<input type="text" class="box" value="${member.mmbti }" name="mmbti"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">이메일</p>
+				<input type="text" class="box" name="memail" value="${member.memail }" required="required"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">생년월일</p>
+				<input type="date" class="box" value="${member.mbirth }" name="mbirth"></td>
 			</tr>
 			<tr>
 				<th>성별</th>
-				<td colspan="2">
-				<label><input type="radio" name="mgender" value="m" checked="checked"> 남자</label>
+				<td>
+				<label><input type="radio" name="mgender" value="m" checked="checked">남자</label>
       			<label><input type="radio" name="mgender" value="f"> 여자</label>
 				</td>
 			</tr>
-			<tr class="lasttr">
-				<th>생년월일</th>
-				<td colspan="2"><input type="date" value="${member.mbirth }" name="mbirth"></td>
-			</tr>
 			<tr>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="정보수정" class="btn btn-primary">
+					<input type="submit" value="정보수정" class="big_blue_btn">
+					<!--  
 					<input type="reset" value="초기화" class="btn btn-primary">
 					<input type="button" value="이전" class="btn btn-primary" onclick="history.back()">
+					-->
 				</td>
 			</tr>
 		</table>	
-	</form>	
+	</form>
+</div>
+
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

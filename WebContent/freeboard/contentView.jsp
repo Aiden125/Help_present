@@ -38,7 +38,45 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <!-- 원글 상세 보여주기 -->
-	<table style="margin-bottom:0;">
+<div id="content_top">
+</div>
+
+<div class="small_wrap">
+	<div class="title">${freeBoard.btitle }</div><hr class="lightgreen">
+	<p>${freeBoard.bcontent }</p><br>
+	<c:if test="${not empty freeBoard.bfilename }">
+	<p class="center">
+	<img src="${conPath }/freeboardUp/${freeBoard.bfilename}" class="center" alt="${freeBoard.bfilename }등록사진" width="150px">
+	</p>
+	<br>
+	</c:if>
+	<br>
+		<div class="right">
+		<c:if test="${member.mid eq freeBoard.mid }">
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${param.bno }'">수정</button>
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${param.bno }'">삭제</button>
+		</c:if>
+		<c:if test="${member.mid != freeBoard.mid }">
+			<button class="blue_btn" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${param.bno }'">답변작성</button>
+		</c:if>
+	</div>
+	<div>
+		<c:if test="${empty member}">
+			좋아요 : ${freeBoard.blike }
+		</c:if>
+		<c:if test="${not empty member}">
+			<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 : ${freeBoard.blike }</a>
+		</c:if>
+	</div>
+	<span class="small_text">
+		${freeBoard.mname } * ${freeBoard.brdate } * 조회수 ${freeBoard.bhit }
+	</span>
+
+</div>
+
+
+<div class="small_wrap">
+	<table>
 		<caption>원글</caption>
 		<tr>
 			<td colspan="8" style="text-align:right"><b>상대MBTI :</b> ${freeBoard.bmbti }<br>
@@ -91,6 +129,7 @@
 			</td>
 		</tr>
 	</table>
+</div>
 
 <!-- 댓글 작성하기 -->	
 	<form action="${conPath}/replyWrite.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }" method="post">

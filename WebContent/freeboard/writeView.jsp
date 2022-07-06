@@ -25,54 +25,57 @@
 </c:if>
 
 <jsp:include page="../main/header.jsp"/>
+<div id="mini_wrap">
 	<form action="${conPath }/freeBoardWrite.do" method="post" enctype="multipart/form-data">
-	<table>
-		<caption>글쓰기</caption>
-		<tr>
-			<td>제목</td>
-			<td><input type="text" name="btitle" required="required"></td>
-		</tr>
-		<tr>
-			<td>선물 받을 분의 MBTI</td>
-			<td>
-				<select name="bmbti" style="width:300px;">
-					<option value="none">선택</option>
-					<option>ENTP</option>
-					<option>ENTJ</option>
-					<option>ENFP</option>
-					<option>ENFJ</option>
-					<option>ESTP</option>
-					<option>ESTJ</option>
-					<option>ESFP</option>
-					<option>ESFJ</option>
-					
-					<option>INTP</option>
-					<option>INTJ</option>
-					<option>INFP</option>
-					<option>INFJ</option>
-					<option>ISTP</option>
-					<option>ISTJ</option>
-					<option>ISFP</option>
-					<option>ISFJ</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><textarea name="bcontent" required="required" style="height:200px;"></textarea></td>
-		</tr>
-		<tr>
-			<td>사진첨부</td>
-			<td><input type="file" name="bfilename" ></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" class="btn btn-primary" value="글등록">
-				<input type="button" class="btn btn-primary" value="글목록" onclick="location.href='${conPath}/freeBoardListView.do'">
-			</td>
-		</tr>
-	</table>
-</form>
+		<table>
+			<caption>글쓰기</caption>
+			<tr>
+				<td colspan="2"><p class="left">제목</p>
+				<input type="text" class="box" name="btitle" required="required"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">선물 받을 사람의 MBTI</p>
+					<select name="bmbti" class="box">
+						<option value="none">선택</option>
+						<option>ENTP</option>
+						<option>ENTJ</option>
+						<option>ENFP</option>
+						<option>ENFJ</option>
+						<option>ESTP</option>
+						<option>ESTJ</option>
+						<option>ESFP</option>
+						<option>ESFJ</option>
+						
+						<option>INTP</option>
+						<option>INTJ</option>
+						<option>INFP</option>
+						<option>INFJ</option>
+						<option>ISTP</option>
+						<option>ISTJ</option>
+						<option>ISFP</option>
+						<option>ISFJ</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">내용</p>
+				<textarea name="bcontent" class="textarea" required="required" style="height:200px;"></textarea></td>
+			</tr>
+			<tr>
+				<td class="right">사진첨부</td>
+				<td class="right"><input type="file" name="bfilename" ></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" class="big_blue_btn" value="글등록">
+					<!--  <input type="button" class="btn btn-primary" value="글목록" onclick="location.href='${conPath}/freeBoardListView.do'"> -->
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
