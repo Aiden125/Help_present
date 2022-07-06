@@ -9,7 +9,6 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href="${conPath }/css/style.css" rel="stylesheet" type="text/css">
-	<link href="${conPath }/css/styles.css" rel="stylesheet" type="text/css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -125,63 +124,68 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
+<div id="mini_wrap">
 	<form action="${conPath }/join.do" name="join_frm" method="post" enctype="multipart/form-data">
 		<table class="join_table">
 			<caption>회원가입</caption>
 			<tr>
-				<th>아이디</th>
-				<td><input type="text" name="mid" required="required">
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">아이디</p><input type="text" class="box" name="mid" required="required">
 				<div id="idCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<th>비밀번호</th>
-				<td><input type="password" name="mpw" required="required"></td>
+				<td colspan="2"><p class="left">비밀번호</p>
+				<input type="password" class="box" name="mpw" required="required"></td>
 			</tr>
 			<tr>
-				<th>비밀번호확인</th>
-				<td><input type="password" name="mpwChk" required="required">
+				<td colspan="2"><p class="left">비밀번호확인</p>
+				<input type="password" class="box" name="mpwChk" required="required">
 				<div id="pwCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<th>닉네임</th>
-				<td><input type="text" name="mname" required="required">
+				<td colspan="2"><p class="left">닉네임</p>
+				<input type="text" class="box" name="mname" required="required">
 				<div id="nameCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<th>나의 MBTI</th>
-				<td><input type="text" name="mmbti"></td>
+				<td colspan="2"><p class="left">나의 MBTI</p>
+				<input type="text" class="box" name="mmbti"></td>
 			</tr>
 			<tr>
-				<th>이메일</th>
-				<td><input type="text" name="memail" required="required">
+				<td colspan="2"><p class="left">이메일</p>
+				<input type="text" class="box" name="memail" required="required">
 				<div id="emailCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<th>사진</th>
-				<td><input type="file" name="mphoto"></td>
+				<td>사진</td>
+				<td><input type="file" class="center" name="mphoto"></td>
 			</tr>
 			<tr>
-				<th>성별</th>
+				<td>성별</td>
 				<td>
 				<label><input type="radio" name="mgender" value="m" checked="checked"> 남자</label>
       			<label><input type="radio" name="mgender" value="f"> 여자</label>
 				</td>
 			</tr>
 			<tr class="lasttr">
-				<th>생년월일</th>
-				<td><input type="date" name="mbirth" id="datepicker"></td>
+				<td>생년월일</td>
+				<td><input type="date" class="box" name="mbirth" id="datepicker"></td>
 			</tr>
 			<tr>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="회원가입" class="btn btn-primary">
-					<input type="reset" value="초기화" class="btn btn-primary">
-					<input type="button" value="로그인" class="btn btn-primary" onclick="location.href='${conPath }/loginView.do'">
+					<input type="submit" value="회원가입" class="big_blue_btn">
+					<!--
+					<input type="reset" value="초기화" class="blue_btn">
+					<input type="button" value="로그인" class="blue_btn" onclick="location.href='${conPath }/loginView.do'">
+					-->
 				</td>
 			</tr>
 		</table>	
-	</form>	
+	</form>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

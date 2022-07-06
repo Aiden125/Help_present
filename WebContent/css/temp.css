@@ -59,17 +59,12 @@ li{
 #big_wrap_list{
 	width:1200px;
 	margin:0px auto;
+	border:2px solid lightgray;
 }
 #small_wrap{
 	width:800px;
 	margin:50px auto;
 	border:2px solid lightgray;
-	padding:20px;
-}
-.small_wrap{
-	width:800px;
-	margin:5px auto;
-	border:5px double gold;
 	padding:20px;
 }
 #mini_wrap{
@@ -116,10 +111,12 @@ td{
 caption{
 	font-size:1.5em;
 }
-.blue_btn
-{
+.btn{
+	
+}
+.blue_btn{
 	width:70px;
-	height:30px;
+	height:40px;
 	vertical-align:middle;
 	background-color:#0D6EFD;
 	border-color:#0D6EFD;
@@ -128,11 +125,10 @@ caption{
 	font-size:14px;
 	display:line-block;
 	text-align:center;
-	cursor:pointer;
 }
 .big_blue_btn{
 	width:120px;
-	height:40px;
+	height:50px;
 	vertical-align:middle;
 	background-color:#0D6EFD;
 	border-color:#0D6EFD;
@@ -141,7 +137,6 @@ caption{
 	font-size:21px;
 	display:line-block;
 	text-align:center;
-	cursor:pointer;
 }
 input:focus{
 	outline:none;
@@ -150,16 +145,21 @@ input:focus{
 	width:1000px;
 	margin:10px auto;
 	margin-top:50px;
+	text-align:right;
 }
 #content_bottom{
 	width:1000px;
 	height:50px;
-	margin:10px auto;
+	margin:0 auto;
+	text-align:right;
 }
 .paging{
 	height:50px;
 	vertical-align:middle;
 	text-align:center;
+}
+#content3{
+	margin
 }
 .gray_btn{
 	width:70px;
@@ -173,13 +173,4 @@ input:focus{
 	font-size:14px;
 	display:line-block;
 	text-align:center;
-	cursor:pointer;
-}
-.caption{
-	font-size:1.5em;
-	text-align:center;
-	margin-bottom:10px;
-}
-b{
-	font-size:1.1em;
 }

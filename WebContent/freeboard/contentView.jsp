@@ -71,7 +71,12 @@
 		<tr>
 			<td colspan="2" style="text-align:left;">
 			<c:if test="${member.mid != null}">
-			<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 : ${freeBoard.blike }</a>
+				<c:if test="${checkLikeStatus == 0 }">
+					<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 전: ${freeBoard.blike }</a>
+				</c:if>
+				<c:if test="${checkLikeStatus == 1 }">
+					<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 후: ${freeBoard.blike }</a>
+				</c:if>
 			</c:if>
 			</td>
 			<td colspan="6" style="text-align:right;">
@@ -122,9 +127,9 @@
 	
 
 <!-- 원글/답변글 구분  -->
-<div class="card text-white bg-secondary my-5 py-4 text-center">
-<div class="card-body"><p class="text-white m-0"></p></div>
-</div>
+<br>
+<br>
+
 
 <!-- 답변 리스트 보여주기 -->
 <c:if test="${answerList.size() != 0 }">

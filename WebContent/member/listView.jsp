@@ -16,28 +16,69 @@
 		});
 	</script>
 </head>
+<c:if test="${memberLikeResult eq '로그인 해주세요'}">
+	<script>
+		alert("${memberLikeResult}");
+		location.href="${conPath}/loginView.do";
+	</script>	
+</c:if> 
+
 <body>
 <jsp:include page="../main/header.jsp"/>
-	<table>
-		<caption>전체회원보기</caption>
-		<tr>
-			<c:forEach var="dto" items="${list }">
-				<td>
-					<img src="${conPath }/memberPhotoUp/${dto.mphoto}" alt="${dto.mname }등록사진" width="150px"><br> 
-					${dto.mid}<br>
-					${dto.mpw}<br>
-					<a href="${conPath }/memberContentView.do?mid=${dto.mid}">${dto.mname }</a><br>
-					(${dto.memail })<br>
-					(${dto.mbirth })<br>					
-					<c:if test="${not empty dto.mmbti}">${dto.mmbti }</c:if>
-					<c:if test="${empty dto.mmbti}">미등록</c:if><br>
-					가입 날짜 : ${dto.mrdate }<br>
-					<a href="${conPath}/mlike.do?mid=${dto.mid}">추천수</a> : ${dto.mlike }<br>
-					글 쓴 갯수 : ${dto.mwritecount }
-				</td>
-			</c:forEach>
-		</tr>
-	</table>
+<div id="content_top">
+	<div class="caption">
+		전체 회원목록
+	</div>
+</div>
+	<c:forEach var="dto" items="${list }">
+	
+		<c:if test="${list.size() eq 0 }">
+		<div class="small_wrap">
+			<table>
+				<tr>
+					<td colspan="7">등록된 회원이 없습니다.</td>
+				</tr>
+			</table>
+		</div>
+		</c:if>
+		
+		<c:if test="${list.size()!=0 }">
+		<div class="small_wrap">
+			<table>
+				<tr>
+					<td colspan="2" rowspan="2">
+						<img src="${conPath }/memberPhotoUp/${dto.mphoto}" alt="${dto.mname }등록사진" width="150px">
+					</td>
+					<td rowspan="2"><b>MBTI</b><br><br>
+									${dto.mmbti }
+					</td>
+					<td rowspan="2"><b>닉네임</b><br><br>
+									${dto.mname }
+					</td>
+					<td rowspan="2"><b>글 작성 수</b><br><br>
+									${dto.mwritecount }
+					</td>
+					<td colspan="2" rowspan="2">
+						<c:if test="${empty member || member.mid == dto.mid}">
+							추천수
+						</c:if>
+						<c:if test="${not empty member && member.mid != dto.mid}">
+							<a href="${conPath}/mlike.do?mid=${dto.mid}&mmyid=${member.mid}">추천수</a>
+						</c:if>
+						<br>${dto.mlike }
+					</td>
+					<td colspan="2" rowspan="2">
+						<input type="button" class="blue_btn" value="질문하기"
+						onclick="location.href='${conPath}/writeOneBoardView.do?mname=${dto.mname }&myid=${member.mid }'">
+					</td>
+				</tr>
+			</table>
+		</div>
+		</c:if>
+	</c:forEach>
+	
+<div id="content_bottom">
+</div>
 	<div class="paging">
 		<c:if test="${startPage > BLOCKSIZE }">
 			[ <a href="${conPath }/memberListView.do?pageNum=${startPage-1 }">이전</a> ]

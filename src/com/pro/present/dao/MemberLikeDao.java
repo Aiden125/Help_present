@@ -10,17 +10,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class LikeBoardDao {
+public class MemberLikeDao {
 	public static final int SUCCESS = 1;
 	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
 	// 싱글톤
-	private static LikeBoardDao instance = new LikeBoardDao();
-	public static LikeBoardDao getInstance() {
+	private static MemberLikeDao instance = new MemberLikeDao();
+	public static MemberLikeDao getInstance() {
 		return instance;
 	}
-	private LikeBoardDao() {
+	private MemberLikeDao() {
 		try {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Oracle11g"); 
@@ -30,17 +30,20 @@ public class LikeBoardDao {
 	}
 	
 	// 1. 좋아요 정보 입력
-	public int hitLike(String mid, int bno) {
+	public int hitLike(String mid, String mmyid) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO LIKE_TABLE VALUES(LIKE_TABLE_SEQ.NEXTVAL, ?, ?, 1)";
+		String sql = "INSERT INTO MEMBER_LIKE_TABLE " + 
+				"    VALUES(MEMBER_LIKE_TABLE_SEQ.NEXTVAL, ?, ?, 1)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
-			pstmt.setInt(2, bno);
+			pstmt.setString(2, mmyid);
 			result = pstmt.executeUpdate();
+			MemberDao mDao = MemberDao.getInstance();
+			mDao.mLikeUp(mid);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -56,17 +59,20 @@ public class LikeBoardDao {
 	
 	
 	// 2. 좋아요 제거하기
-	public int deleteLike(String mid, int bno) {
+	public int deleteLike(String mid, String mmyid) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE LIKE_TABLE WHERE bNO=? AND mID=? AND LIKECHECK=1 ";
+		String sql = "DELETE MEMBER_LIKE_TABLE " + 
+				"    WHERE mID=? AND mMYID=? AND LIKECHECK=1";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
-			pstmt.setString(2, mid);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mmyid);
 			result = pstmt.executeUpdate();
+			MemberDao mDao = MemberDao.getInstance();
+			mDao.mLikeDown(mid);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -81,17 +87,19 @@ public class LikeBoardDao {
 	}
 	
 	// 3. 눌렀는지 확인
-	public int checkLike(String mid, int bno) {
+	public int checkLike(String mid, String mmyid) {
 		int totCnt = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT LIKECHECK FROM LIKE_TABLE WHERE bNO=? AND mID=?";
+		String sql = "SELECT LIKECHECK " + 
+				"    FROM MEMBER_LIKE_TABLE " + 
+				"    WHERE mID=? AND mMYID=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
-			pstmt.setString(2, mid);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mmyid);
 			rs = pstmt.executeQuery();
 			rs.next();
 			totCnt = rs.getInt("likecheck");

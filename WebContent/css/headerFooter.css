@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+/* 초기화 */
+*{
+	margin:0;
+	padding:0;
+}
+
+/* 헤더 */
+#nav_wrap{
+	background-color:black;
+	height:60px;
+	line-height:60px;
+}
+#nav_bar{
+	width:60%;
+	color:white;
+	margin:0 auto;
+}
+#nav_bar_title{
+	font-size:16pt;
+	color:white;
+	float:left;
+}
+.nav_item{
+	float:right;
+	font-size:12pt;
+	margin:0 10px;
+}
+.nav-link{
+	text-decoration:none;
+	color:white;
+}
+a{
+	text-decoration:none;
+	color:blue;
+}
+li{
+	list-style:none;
+}
+
+/* 푸터 */
+#footer{
+	height:100px;
+	line-height:100px;
+	background-color:black;
+	color:white;
+	font-size:12pt;
+	margin:0 auto;
+	text-align:center;
+}

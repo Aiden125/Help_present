@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="${conPath }/css/style.css" rel="stylesheet">
+	<link href="${conPath }/css/boardList.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -16,7 +16,7 @@
 		});
 	</script>
 </head>
-<body>
+
 <c:if test="${oWriteResult eq '질문등록 성공'}">
 	<script>
 		alert('${oWriteResult}');
@@ -29,10 +29,18 @@
 	</script>
 </c:if>
 
+<body>
+
 <jsp:include page="../main/header.jsp"/>
-	<table style="text-align:'center'">
-		<caption>내가 한 질문</caption>
-		<tr>
+<div id="content_top">
+	<div class="caption">
+		내가 보낸 일대일 질문
+	</div>
+</div>
+
+<div id="big_wrap_list">
+	<table>
+		<tr class="tr_top">
 			<th>글번호</th><th colspan="4">글제목</th><th>상대방</th><th>작성일</th><th>답변여부</th>
 			<c:if test="${list.size() eq 0 }">
 				<tr><td colspan="8">내가 한 질문이 없습니다.</td></tr>
@@ -53,7 +61,9 @@
 				</c:forEach>
 			</c:if>
 	</table>
-	
+</div>
+<div id="content_bottom">
+</div>
 <!-- 페이징처리  -->
 	<div class="paging">
 		<c:if test="${startPage > BLOCKSIZE }">

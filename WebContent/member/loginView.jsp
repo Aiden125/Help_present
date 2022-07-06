@@ -7,13 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Small Business - Start Bootstrap Template</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<link href="${conPath }/css/styles.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -21,7 +15,6 @@
 		});
 	</script>
 </head>
-<body>
 <c:if test="${not empty joinResult }">
 	<script>
 		alert('${joinResult}');
@@ -35,26 +28,36 @@
 		history.back();
 	</script>
 </c:if>
+<body>
 <jsp:include page="../main/header.jsp"/>
+<div id="mini_wrap">
 	<form action="${conPath }/login.do" name="join_frm" method="post">
-		<table class="join_table">
+		<table>
 			<caption>로그인</caption>
 			<tr>
-				<th>아이디</th>
-				<td><input type="text" name="mid" value="${mid }" required="required"></td>
 			</tr>
 			<tr>
-				<th>비밀번호</th>
-				<td><input type="password" name="mpw" required="required"></td>
+				<td><p class="left">아이디</p><input type="text" name="mid" class="box" value="${mid }" required="required"></td>
+			</tr>
+			<tr>
+				<td>
+				<p class="left">비밀번호</p>
+				<input type="password" name="mpw" class="box" required="required">
+				</td>
+			</tr>
+			<tr>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="로그인" class="btn btn-primary">
-					<input type="button" value="회원가입" class="btn btn-primary" onclick="location.href='${conPath}/joinView.do'">
+					<input type="submit" value="로그인" class="big_blue_btn">
+					<!--
+					<input type="button" value="회원가입" class="blue_btn" onclick="location.href='${conPath}/joinView.do'">
+					-->
 				</td>
 			</tr>
 		</table>	
-	</form>	
+	</form>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

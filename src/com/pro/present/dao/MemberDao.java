@@ -419,6 +419,28 @@ public class MemberDao {
 		}
 	}
 	
+	// 9. 좋아요 올리기
+	public void mLikeDown(String mid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE MEMBER SET mLIKE = mLIKE-1 WHERE mID=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	// 10. 글쓴 갯수 올리기
 	public void writecountUp(String mid) {
