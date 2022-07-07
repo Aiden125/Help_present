@@ -65,14 +65,19 @@
 						<c:if test="${not empty member && member.mid != dto.mid && param.pageNum eq null}">
 							<a href="${conPath}/mlike.do?mid=${dto.mid}&mmyid=${member.mid}">추천수</a>
 						</c:if>
-						<c:if test="${not empty member && member.mid != dto.mid && $param.pageNum != 0}">
+						<c:if test="${not empty member && member.mid != dto.mid && param.pageNum != null}">
 							<a href="${conPath}/mlike.do?mid=${dto.mid}&mmyid=${member.mid}&pageNum=${param.pageNum }">추천수</a>
 						</c:if>
 						<br>${dto.mlike }
 					</td>
 					<td colspan="2" rowspan="2">
-						<input type="button" class="blue_btn" value="질문하기"
-						onclick="location.href='${conPath}/writeOneBoardView.do?mname=${dto.mname }&myid=${member.mid }'">
+						<c:if test="${member.mid != dto.mid}">
+							<input type="button" class="blue_btn" value="질문하기"
+							onclick="location.href='${conPath}/writeOneBoardView.do?mname=${dto.mname }&myid=${member.mid }'">
+						</c:if>
+						<c:if test="${member.mid eq dto.mid}">
+							내 프로필
+						</c:if>
 					</td>
 				</tr>
 			</table>

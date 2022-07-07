@@ -48,6 +48,52 @@
 
 <jsp:include page="../main/header.jsp"/>
 <!-- 원글 상세 보여주기 -->
+<c:if test="${empty oContentView }">
+<div id="content_top">
+	<div class="caption">삭제된 글입니다.</div>
+	<br>
+</div>
+</c:if>
+<c:if test="${not empty oContentView }">
+<div id="content_top">
+	<div class="caption">
+	질문글
+	</div>
+</div>
+
+<div class="small_wrap_q">
+	
+	<div class="title">${oContentView.obtitle }</div><hr class="lightgreen">
+	<p>${oContentView.obcontent }</p><br>
+	
+	<br>
+	<br>
+	<div class="small_text" style="float:left;">
+		${oContentView.mname } * ${oContentView.obrdate }
+	</div>
+	
+	<div class="right" style="float:right;">
+			<c:if test="${member.mid eq oContentView.mid }">
+				<button class="gray_btn" onclick="location.href='${conPath}/oneBoardModifyView.do?obno=${param.obno }&pageNum=${param.pageNum }&obgroup=${param.obgroup }'">수정</button>
+				<button class="gray_btn" onclick="location.href='${conPath}/oneBoardDelete.do?obno=${param.obno }&pageNum=${param.pageNum }&obgroup=${param.obgroup }'">삭제</button>
+			</c:if>
+			<c:if test="${member.mid != oContentView.mid }">
+				<button class="blue_btn" onclick="location.href='${conPath}/oneBoardReplyView.do?obno=${param.obno }&mname=${oContentView.mname }&obgroup=${param.obgroup }'">답변작성</button>
+			</c:if>
+	</div>
+	<br>
+
+</div>
+<div id="content_top">
+</div>
+<br>
+</c:if>
+
+
+<%-- 
+
+</c:if>
+
 	<table style="margin-bottom:0;">
 		<caption>원글</caption>
 		<tr>
@@ -77,14 +123,56 @@
 			</c:if>
 			</td>
 		</tr>
-	</table>
-	
-<!-- 원글/답변글 구분  -->
-<div class="card text-white bg-secondary my-5 py-4 text-center">
-<div class="card-body"><p class="text-white m-0"></p></div>
-</div>
+	</table> --%>
+
+
 
 <!-- 답변 리스트 보여주기 -->
+
+<c:if test="${answerList.size() != 0 }">
+<!-- 원글/답변글 구분  -->
+<hr>
+<hr>
+<div id="content_top">
+	<div class="caption">
+	
+	</div>
+</div>
+
+
+<div id="content_top">
+</div>
+	<c:forEach var="dtos" items="${answerList }">
+<div class="small_wrap_a">
+
+	<div class="title">${dtos.obtitle }</div>
+	<hr>
+	<p>${dtos.obcontent }</p>
+	<br>
+	<br>
+	<div class="small_text" style="float:left;">
+		 &nbsp; ${dtos.mname } * ${dtos.obrdate }
+	</div>
+	<div class="right" style="float:right;">
+		<c:if test="${member.mid eq dtos.mid }">
+			<button class="gray_btn" onclick="location.href='${conPath}/oneBoardModifyView.do?obno=${dtos.obno }&obgroup=${param.obgroup }'">수정</button>
+			<button class="gray_btn" onclick="location.href='${conPath}/oneBoardDelete.do?obno=${dtos.obno }&obgroup=${param.obgroup }'">삭제</button>
+		</c:if>
+		<c:if test="${member.mid != dtos.mid }">
+			<button class="blue_btn" onclick="location.href='${conPath}/oneBoardReplyView.do?obno=${param.obno }&mname=${dtos.mname }&obgroup=${param.obgroup }'">답변작성</button>
+		</c:if>	
+	</div>
+	<br>	
+
+</div>
+	</c:forEach>
+</c:if>
+
+
+
+
+
+<%-- <!-- 답변 리스트 보여주기 -->
 
 <c:if test="${answerList.size() != 0 }">
 	<c:forEach var="dtos" items="${answerList }">
@@ -120,7 +208,7 @@
 		</tr>
 	</table>
 	</c:forEach>
-</c:if>
+</c:if> --%>
 	
 <jsp:include page="../main/footer.jsp"/>
 </body>

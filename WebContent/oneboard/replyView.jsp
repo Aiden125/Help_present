@@ -25,28 +25,33 @@
 </c:if>
 
 <jsp:include page="../main/header.jsp"/>
+<div class="height_wrap">
+<div id="mini_wrap">
 	<form action="${conPath }/oneBoardReply.do?mid=${myid}" method="post">
 	<input type="hidden" name="obgroup" value="${replyView.obgroup }">
 	<input type="hidden" name="obstep" value="${replyView.obstep }">
 	<input type="hidden" name="obgetname" value="${replyView.mname }">
-	<table>
-		<caption>${param.obno }번 글 답변</caption>
-		<tr>
-			<td>제목</td>
-			<td><input type="text" name="obtitle" required="required"></td>
-		</tr>
-		<tr>
-			<td>본문</td>
-			<td><textarea name="bcontent" required="required" style="height:200px;"></textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" class="btn btn-primary" value="답변등록">
-				<input type="button" class="btn btn-primary" value="이전" onclick="location.href='history.back();'">
-			</td>
-		</tr>
-	</table>
-</form>
+		<table>
+			<caption>${param.mname }님께 답변</caption>
+			<tr>
+				<td colspan="2"><p class="left">제목</p>
+				<input type="text" class="box_readonly" name="obtitle" value="답변글" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">내용</p>
+				<textarea name="obcontent" class="textarea" required="required"></textarea></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" class="big_blue_btn" value="답변등록">
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

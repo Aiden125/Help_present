@@ -168,15 +168,11 @@ COMMIT;
 -- 1. 댓글 달기
 INSERT INTO REPLY(rNO, mID, bNO, rCONTENT, rIP)
     VALUES(REPLY_SEQ.NEXTVAL, 'eee', 23, '첫 댓글', '123.123.123.111');
-    
--- 2. 댓글 수정
-UPDATE REPLY SET rCONTENT='수정 댓글'
-            WHERE rNO=3;
             
--- 3. 댓글 삭제
+-- 2. 댓글 삭제
 DELETE REPLY WHERE rNO=3;
 
--- 4. 댓글 리스트 보기
+-- 3. 댓글 리스트 보기
 SELECT R.*, M.mNAME FROM REPLY R, FREEBOARD F, MEMBER M
         WHERE R.bNO=F.bNO AND F.bGROUP=33 AND F.bINDENT=0 AND M.mID=R.mID
         ORDER BY R.rRDATE;
@@ -297,5 +293,35 @@ SELECT * FROM FREEBOARD;
 SELECT * FROM MEMBER;
 COMMIT;
 
+
+
+-- 회원 추천 테이블 DAO
+
+-- 멤버 좋아요 누르기
+INSERT INTO MEMBER_LIKE_TABLE
+    VALUES(MEMBER_LIKE_TABLE_SEQ.NEXTVAL, 'aaa', 'bbb', 1);
+
+-- 멤버 좋아요 제거하기
+DELETE MEMBER_LIKE_TABLE
+    WHERE mID='aaa' AND mMYID='bbb' AND LIKECHECK=1;
+
+-- 멤버 눌렀는지 확인하기
+SELECT LIKECHECK
+    FROM MEMBER_LIKE_TABLE
+    WHERE mID='aaa' AND mMYID='bbb';
+
+
+-- 게시판 좋아요 테이블 DAO
+
+-- 게시판 좋아요 누르기
+INSERT INTO LIKE_TABLE VALUES(LIKE_TABLE_SEQ.NEXTVAL, 'aaa', 3, 1);
+
+-- 게시판 좋아요 제거하기
+DELETE LIKE_TABLE WHERE bNO=8 AND mID='aaa' AND LIKECHECK=1;
+
+-- 게시판 눌렀는지 확인하기
+SELECT LIKECHECK FROM LIKE_TABLE WHERE bNO=214 AND mID='aaa';
+
+SELECT * FROM LIKE_TABLE WHERE bNO=214;
 
 

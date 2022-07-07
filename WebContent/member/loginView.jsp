@@ -30,6 +30,7 @@
 </c:if>
 <body>
 <jsp:include page="../main/header.jsp"/>
+<div class="height_wrap">
 <div id="mini_wrap">
 	<form action="${conPath }/login.do" name="join_frm" method="post">
 		<table>
@@ -57,6 +58,7 @@
 			</tr>
 		</table>	
 	</form>
+</div>
 </div>
 <jsp:include page="../main/footer.jsp"/>
 </body>

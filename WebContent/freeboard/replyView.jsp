@@ -25,38 +25,41 @@
 </c:if>
 
 <jsp:include page="../main/header.jsp"/>
+<div id="mini_wrap">
 	<form action="${conPath }/freeBoardReply.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="bgroup" value="${replyView.bgroup }">
-	<input type="hidden" name="bstep" value="${replyView.bstep }">
-	<input type="hidden" name="bindent" value="${replyView.bindent }">
-	<input type="hidden" name="pageNum" value="${param.pageNum }">
-	<table>
-		<caption>${param.bno }번 글 답변</caption>
-		<tr>
-			<td>제목</td>
-			<td><input type="text" name="btitle" required="required"></td>
-		</tr>
-		<tr>
-			<td>상대방 MBTI</td>
-			<td><input type="text" name="bmbti" value="답변글" readonly="readonly"></td>
-		</tr>
-		<tr>
-			<td>본문</td>
-			<td><textarea name="bcontent" required="required" style="height:200px;"></textarea></td>
-		</tr>
-		<tr>
-			<td>사진첨부</td>
-			<td><input type="file" name="bfilename" ></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" class="btn btn-primary" value="답변등록">
-				<input type="button" class="btn btn-primary" value="글목록" onclick="location.href='${conPath}/freeBoardListView.do'">
-				<input type="button" class="btn btn-primary" value="이전" onclick="location.href='history.back();'">
-			</td>
-		</tr>
-	</table>
-</form>
+		<input type="hidden" name="bgroup" value="${replyView.bgroup }">
+		<input type="hidden" name="bstep" value="${replyView.bstep }">
+		<input type="hidden" name="bindent" value="${replyView.bindent }">
+		<input type="hidden" name="pageNum" value="${param.pageNum }">
+		<table>
+			<caption>답변하기</caption>
+			<tr>
+				<td colspan="2"><p class="left">제목</p>
+				<input type="text" class="box_readonly" name="btitle" value="답변글" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">선물 받을 사람의 MBTI</p>
+				<input type="text" class="box_readonly" name="bmbti" value="답변글" readonly="readonly">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">내용</p>
+				<textarea name="bcontent" class="textarea" required="required"></textarea></td>
+			</tr>
+			<tr>
+				<td class="right">사진첨부</td>
+				<td class="right"><input type="file" name="bfilename" ></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" class="big_blue_btn" value="답변등록">
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

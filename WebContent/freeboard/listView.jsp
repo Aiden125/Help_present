@@ -96,7 +96,8 @@
 <body>
 
 <jsp:include page="../main/header.jsp"/>
-<div id="content_top">
+<div class="height_wrap">
+<div id="content_top_2">
 	<form action="#" name="frm">
 		<div class="right">
 			<input type="text" class="middle_box" name="word" value="${param.word }">
@@ -175,7 +176,7 @@
 		 &nbsp; [ <a href="${conPath }/freeBoardListView.do?word=${param.word }&pageNum=${endPage + 1 }">다음</a> ]
 	</c:if>
 </div>
-
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

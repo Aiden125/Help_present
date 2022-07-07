@@ -19,25 +19,33 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div id="mini_wrap">
-	<form action="${conPath }/oneBoardModify.do?obno=${dto.obno}&obgroup=${dto.obgroup}" method="post">
-		<table>
-			<caption>${dto.obno }번 글 수정하기</caption>
+	<form action="${conPath }/adminJoin.do" name="join_frm" method="post">
+		<table class="join_table">
+			<caption>관리자 등록</caption>
 			<tr>
-				<td colspan="2"><p class="left">제목</p>
-				<input type="text" name="obtitle" class="box" value="${dto.obtitle }" required="required"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">내용</p>
-				<textarea name="obcontent" class="textarea" required="required">${dto.obcontent }</textarea></td>
+				<td colspan="2"><p class="left">아이디 <span class="red">*</span> </p>
+				<input type="text" class="box" name="aid" required="required">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">비밀번호 <span class="red">*</span></p>
+				<input type="password" class="box" name="apw" required="required"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">이름 <span class="red">*</span></p>
+				<input type="text" class="box" name="aname" required="required">
+				</td>
 			</tr>
 			<tr>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" class="big_blue_btn" value="수정하기">
+					<input type="submit" value="관리자등록" class="big_blue_btn">
 				</td>
 			</tr>
-		</table>
+		</table>	
 	</form>
 </div>
 <jsp:include page="../main/footer.jsp"/>

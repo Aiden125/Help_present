@@ -15,6 +15,8 @@ import com.pro.present.service.McontentViewService;
 import com.pro.present.service.MemailCheckService;
 import com.pro.present.service.MnameCheckService;
 import com.pro.present.service.MidCheckService;
+import com.pro.present.service.AjoinService;
+import com.pro.present.service.AloginService;
 import com.pro.present.service.BcontentViewService;
 import com.pro.present.service.BdeleteService;
 import com.pro.present.service.BlistViewService;
@@ -40,6 +42,7 @@ import com.pro.present.service.OreplyViewService;
 import com.pro.present.service.OrequestListViewService;
 import com.pro.present.service.OresponseListViewService;
 import com.pro.present.service.OwriteService;
+import com.pro.present.service.RdeleteService;
 import com.pro.present.service.RwriteService;
 import com.pro.present.service.Service;
 
@@ -47,13 +50,13 @@ import com.pro.present.service.Service;
  * Servlet implementation class MemberController
  */
 @WebServlet("*.do")
-public class MemberController extends HttpServlet {
+public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberController() {
+    public FrontController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -157,6 +160,10 @@ public class MemberController extends HttpServlet {
 			service = new RwriteService();
 			service.execute(request, response);
 			viewPage = "/freeBoardContentView.do";
+		}else if(command.equals("/replyDelete.do")) {
+			service = new RdeleteService();
+			service.execute(request, response);
+			viewPage = "/freeBoardContentView.do";
 		}else if(command.equals("/requestListView.do")) {
 			service = new OrequestListViewService();
 			service.execute(request, response);
@@ -219,7 +226,23 @@ public class MemberController extends HttpServlet {
 			service = new MlikeService();
 			service.execute(request, response);
 			viewPage = "/memberListView.do";
+		}else if(command.equals("/adminLoginView.do")) {
+			viewPage = "admin/loginView.jsp";
+		}else if(command.equals("/adminLogin.do")) {
+			service = new AloginService();
+			service.execute(request, response);
+			viewPage = "/freeBoardListView.do";
+		}else if(command.equals("/adminJoinView.do")) {
+			viewPage = "admin/joinView.jsp";
+		}else if(command.equals("/adminJoin.do")) {
+			service = new AjoinService();
+			service.execute(request, response);
+			viewPage = "/freeBoardListView.do";
 		}
+		
+		
+		
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

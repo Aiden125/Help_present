@@ -26,6 +26,33 @@
 </c:if>
 
 <jsp:include page="../main/header.jsp"/>
+<div class="height_wrap">
+<div id="mini_wrap">
+	<form action="${conPath }/oneBoardWrite.do?mid=${param.myid}&mname=${param.mname}" method="post">
+		<table>
+			<caption>${param.mname }님께 일대일 질문하기</caption>
+			<tr>
+				<td colspan="2"><p class="left">제목</p>
+				<input type="text" class="box" name="obtitle" required="required"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="left">내용</p>
+				<textarea name="obcontent" class="textarea" required="required"></textarea></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" class="big_blue_btn" value="글등록">
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+
+<%-- 
+
 <form action="${conPath }/oneBoardWrite.do?mid=${param.myid}&mname=${param.mname}" method="post">
 	<table>
 		<caption>${param.mname }님 께 일대일 질문하기</caption>
@@ -44,7 +71,8 @@
 			</td>
 		</tr>
 	</table>
-</form>
+</form> --%>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

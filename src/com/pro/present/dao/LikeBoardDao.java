@@ -93,8 +93,9 @@ public class LikeBoardDao {
 			pstmt.setInt(1, bno);
 			pstmt.setString(2, mid);
 			rs = pstmt.executeQuery();
-			rs.next();
-			totCnt = rs.getInt("likecheck");
+			if(rs.next()) {
+				totCnt = rs.getInt("likecheck");
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {

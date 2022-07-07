@@ -408,7 +408,7 @@ public class MemberDao {
 			pstmt.setString(1, mid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + " : mLikeUp ");
 		} finally {
 			try {
 				if(pstmt!=null) pstmt.close();
@@ -430,7 +430,7 @@ public class MemberDao {
 			pstmt.setString(1, mid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + " : mLikeDown");
 		} finally {
 			try {
 				if(pstmt!=null) pstmt.close();

@@ -31,6 +31,7 @@
 <body>
 
 <jsp:include page="../main/header.jsp"/>
+<div class="height_wrap">
 <div id="content_top">
 	<div class="caption">
 		내가 받은 일대일 질문
@@ -81,6 +82,7 @@
 			 &nbsp; [ <a href="${conPath }/responseListView.do?mid=${mid }&pageNum=${endPage + 1 }">다음</a> ]
 		</c:if>
 	</div>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

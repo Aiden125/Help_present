@@ -18,7 +18,7 @@ public class MlistViewService implements Service {
 				pageNum="1";
 			}
 			int currentPage = Integer.parseInt(pageNum);
-			final int PAGESIZE = 3, BLOCKSIZE = 3;
+			final int PAGESIZE = 3, BLOCKSIZE = 5;
 			int startRow = (currentPage-1)*PAGESIZE+1; // 시작 번째 수
 			int endRow = startRow + PAGESIZE -1; // // 끝나는 번째 수
 			

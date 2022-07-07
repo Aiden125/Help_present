@@ -18,27 +18,32 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
+<div class="height_wrap">
 <div id="mini_wrap">
-	<form action="${conPath }/oneBoardModify.do?obno=${dto.obno}&obgroup=${dto.obgroup}" method="post">
+	<form action="${conPath }/adminLogin.do" name="join_frm" method="post">
 		<table>
-			<caption>${dto.obno }번 글 수정하기</caption>
+			<caption>로그인</caption>
 			<tr>
-				<td colspan="2"><p class="left">제목</p>
-				<input type="text" name="obtitle" class="box" value="${dto.obtitle }" required="required"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">내용</p>
-				<textarea name="obcontent" class="textarea" required="required">${dto.obcontent }</textarea></td>
+				<td><p class="left">아이디</p><input type="text" name="aid" class="box" value="${aid }" required="required"></td>
+			</tr>
+			<tr>
+				<td>
+				<p class="left">비밀번호</p>
+				<input type="password" name="apw" class="box" required="required">
+				</td>
 			</tr>
 			<tr>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" class="big_blue_btn" value="수정하기">
+					<input type="submit" value="로그인" class="big_blue_btn">
 				</td>
 			</tr>
-		</table>
+		</table>	
 	</form>
+</div>
 </div>
 <jsp:include page="../main/footer.jsp"/>
 </body>

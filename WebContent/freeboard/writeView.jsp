@@ -36,7 +36,7 @@
 			<tr>
 				<td colspan="2"><p class="left">선물 받을 사람의 MBTI</p>
 					<select name="bmbti" class="box">
-						<option value="none">선택</option>
+						<option value="미등록">선택</option>
 						<option>ENTP</option>
 						<option>ENTJ</option>
 						<option>ENFP</option>
@@ -54,12 +54,14 @@
 						<option>ISTJ</option>
 						<option>ISFP</option>
 						<option>ISFJ</option>
+						
+						<option value="미등록">모름</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"><p class="left">내용</p>
-				<textarea name="bcontent" class="textarea" required="required" style="height:200px;"></textarea></td>
+				<textarea name="bcontent" class="textarea" required="required"></textarea></td>
 			</tr>
 			<tr>
 				<td class="right">사진첨부</td>

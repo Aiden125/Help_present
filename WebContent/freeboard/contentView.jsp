@@ -25,6 +25,19 @@
 		history.back();
 	</script>
 </c:if>
+
+<c:if test="${replyDeleteResult eq '댓글삭제 성공'}">
+	<script>
+		alert('${replyDeleteResult}');
+	</script>
+</c:if>
+<c:if test="${replyDeleteResult eq '댓글삭제 실패'}">
+	<script>
+		alert('${replyDeleteResult}');
+		history.back();
+	</script>
+</c:if>
+
 <c:if test="${replyResult eq '로그인 해주세요'}">
 	<script>
 		alert('${replyResult}');
@@ -37,11 +50,25 @@
 
 <body>
 <jsp:include page="../main/header.jsp"/>
-<!-- 원글 상세 보여주기 -->
+
+
+<!-- 원글 삭제된 경우 보여주기 -->
+<c:if test="${empty freeBoard }">
 <div id="content_top">
+	<div class="caption">삭제된 글입니다.</div>
+	<br>
+</div>
+</c:if>
+
+<!-- 원글 있는 경우 보여주기 -->
+<c:if test="${not empty freeBoard }">
+<div id="content_top">
+	<div class="caption">
+	질문글
+	</div>
 </div>
 
-<div class="small_wrap">
+<div class="small_wrap_q">
 	<div class="title">${freeBoard.btitle }</div><hr class="lightgreen">
 	<p>${freeBoard.bcontent }</p><br>
 	<c:if test="${not empty freeBoard.bfilename }">
@@ -51,165 +78,142 @@
 	<br>
 	</c:if>
 	<br>
-		<div class="right">
-		<c:if test="${member.mid eq freeBoard.mid }">
-			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${param.bno }'">수정</button>
-			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${param.bno }'">삭제</button>
+	<br>
+	<div>
+		<c:if test="${empty member || member.mid eq freeBoard.mid }">
+			좋아요 : ${freeBoard.blike }
 		</c:if>
-		<c:if test="${member.mid != freeBoard.mid }">
-			<button class="blue_btn" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${param.bno }'">답변작성</button>
+		<c:if test="${not empty member && member.mid != freeBoard.mid}">
+			<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 : ${freeBoard.blike }</a>
 		</c:if>
 	</div>
+	<div class="small_text" style="float:left;">
+		${freeBoard.mname } * ${freeBoard.brdate } * 조회수 ${freeBoard.bhit }
+	</div>
+	<div class="right" style="float:right;">
+		<c:if test="${not empty admin }">
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }'">삭제</button>
+		</c:if>
+		<c:if test="${member.mid eq freeBoard.mid }">
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }'">수정</button>
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }'">삭제</button>
+		</c:if>
+		<c:if test="${member.mid != freeBoard.mid && empty admin}">
+			<button class="blue_btn" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }'">답변작성</button>
+		</c:if>
+	</div>
+	<br>
+
+</div>
+
+<!-- 댓글 작성하기 -->
+<div class="reply_wrap">
+	<form action="${conPath}/replyWrite.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }" method="post">
+		<textarea name="rcontent" class="reply_textarea" required="required"></textarea>
+		<div class="right">
+			<input type="submit" class="gray_btn" value="댓글 등록">
+		</div>
+	</form>
+</div>
+
+<!-- 댓글 보여주기 -->
+<div class="reply_wrap">
+	<c:if test="${replyList.size() != 0 }">
+		<c:forEach var="replys" items="${replyList }">
+		<hr>
+		<p>댓글 : ${replys.rcontent }</p>
+		<br>
+		<div class="small_text" style="float:left;">${replys.mname } * ${replys.rrdate }</div>
+		<c:if test="${member.mid eq replys.mid }">
+		<div style="float:right">
+			<input type="button" class="gray_btn_margin" value="삭제"
+			onclick="location.href='${conPath}/replyDelete.do?rno=${replys.rno }&bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }'">
+		</div>
+		</c:if>
+		<c:if test="${not empty admin }">
+		<div style="float:right">
+			<input type="button" class="gray_btn_margin" value="삭제"
+			onclick="location.href='${conPath}/replyDelete.do?rno=${replys.rno }&bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }'">
+		</div>
+		</c:if>
+		<br>
+		<br>
+		</c:forEach>
+	</c:if>
+</div>
+</c:if>
+
+<c:if test="${answerList.size() eq 0 }">
+<hr>
+<hr>
+<div id="content_top">
+	<div class="caption">
+	아직 등록된 답변이 없습니다.
+	</div>
+</div>
+<div class="height_wrap_mini">
+</div>
+</c:if>
+<!-- 답변 리스트 보여주기 -->
+
+<c:if test="${answerList.size() != 0 }">
+<!-- 원글/답변글 구분  -->
+<hr>
+<hr>
+<div id="content_top">
+	<div class="caption">
+	</div>
+</div>
+
+
+<div id="content_top">
+</div>
+	<c:forEach var="dtos" items="${answerList }">
+<div class="small_wrap_a">
+
+	<div class="title">${dtos.btitle }</div>
+	<hr>
+	<p>${dtos.bcontent }</p>
+	<br>
+	<c:if test="${not empty dtos.bfilename }">
+		<p class="center">
+			<img src="${conPath }/freeboardUp/${dtos.bfilename}" class="center" alt="${dtos.bfilename }등록사진" width="150px">
+		</p>
+		<br>
+	</c:if>
+	
+	<br>
+	<br>
 	<div>
 		<c:if test="${empty member}">
 			좋아요 : ${freeBoard.blike }
 		</c:if>
 		<c:if test="${not empty member}">
-			<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 : ${freeBoard.blike }</a>
+			<a href='${conPath}/freeBoardLike.do?bno=${dtos.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 : ${dtos.blike }</a>
 		</c:if>
 	</div>
-	<span class="small_text">
-		${freeBoard.mname } * ${freeBoard.brdate } * 조회수 ${freeBoard.bhit }
-	</span>
-
-</div>
-
-
-<div class="small_wrap">
-	<table>
-		<caption>원글</caption>
-		<tr>
-			<td colspan="8" style="text-align:right"><b>상대MBTI :</b> ${freeBoard.bmbti }<br>
-													<b>작성자 :</b> ${freeBoard.mname }</td>
-		</tr>
-		<tr>
-			<td colspan="1" style="text-align:left; font-size:1.5em;">제목 </td>
-			<td colspan="7" style="text-align:left; font-size:1.5em;">${freeBoard.btitle }</td>
-		</tr>
-		<tr>
-			<td colspan="1" style="height: 200px; text-align: left;">본문</td>
-			<td colspan="7" style="height: 200px; text-align: left;">${freeBoard.bcontent }</td>
-		</tr>
-		
-		<tr>
-			<td colspan="1" style="height: 200px; text-align: left;">첨부사진</td>
-			<td colspan="7" style="height: 200px; text-align: left;">
-			<c:if test="${empty freeBoard.bfilename }">첨부사진없음</c:if>
-			<c:if test="${not empty freeBoard.bfilename }">
-			<img src="${conPath }/freeboardUp/${freeBoard.bfilename}" alt="${freeBoard.bfilename }등록사진" width="150px"><br>
-				<!--  <a href="img/${freeBoard.bfilename }" target="_blank">${freeBoard.bfilename }</a>-->
-			</c:if></td>
-		</tr>
-		<tr>
-			<td colspan="8" style="text-align:right;">
-			조회수 : ${freeBoard.bhit }<br>
-			작성일 : ${freeBoard.brdate }
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" style="text-align:left;">
-			<c:if test="${member.mid != null}">
-				<c:if test="${checkLikeStatus == 0 }">
-					<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 전: ${freeBoard.blike }</a>
-				</c:if>
-				<c:if test="${checkLikeStatus == 1 }">
-					<a href='${conPath}/freeBoardLike.do?bno=${param.bno }&bgroup=${param.bgroup}&mid=${member.mid}'>좋아요 후: ${freeBoard.blike }</a>
-				</c:if>
-			</c:if>
-			</td>
-			<td colspan="6" style="text-align:right;">
-			<c:if test="${member.mid eq freeBoard.mid }">
-				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${param.bno }'">수정</button>
-				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${param.bno }'">삭제</button>
-			</c:if>
-			<c:if test="${member.mid != freeBoard.mid }">
-				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${param.bno }'">답변작성</button>
-			</c:if>
-				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardListView.do?pageNum=${param.pageNum }'">글목록</button>
-			</td>
-		</tr>
-	</table>
-</div>
-
-<!-- 댓글 작성하기 -->	
-	<form action="${conPath}/replyWrite.do?bno=${param.bno }&pageNum=${param.pageNum }&bgroup=${param.bgroup }" method="post">
-		<table style="margin-top:10px;" >
-		<tr>
-			<td colspan="8">
-				<textarea name=rcontent style="height:50px;" required="required"></textarea>
-				<input type="submit" class="btn" value="댓글 등록" style="text-align:center; background-color:lightgray;">
-			</td>
-		</tr>
-		</table>
-	</form>
-
-<!-- 댓글 보여주기 -->
-	<c:if test="${replyList.size() != 0 }">
-		<c:forEach var="replys" items="${replyList }">
-	<table>
-		<tr style="margin:0 auto;">
-			<td colspan="8">
-				<textarea name=rcontent style="height:50px;" readonly="readonly">댓글 내용 : ${replys.rcontent }</textarea><br>
-				<p style="text-align:right;">작성자 : ${replys.mname } &nbsp; 작성일 : ${replys.rrdate }</p>
-				<c:if test="${member.mid eq replys.mid }">
-				<input type="button" class="btn" value="댓글 삭제" style="text-align:center; background-color:lightgray;"
-				onclick="location.href='${conPath}/freeBoardDelete.do?rno=${rno }&bno=${param.bno }&pageNum=${param.pageNum }'">
-			</c:if>
-			</td>
-		</tr>
-	</table>
-		</c:forEach>
-	</c:if>
 	
-
-			
-	
-
-<!-- 원글/답변글 구분  -->
-<br>
-<br>
-
-
-<!-- 답변 리스트 보여주기 -->
-<c:if test="${answerList.size() != 0 }">
-	<c:forEach var="dtos" items="${answerList }">
-	
-	<table>
-		<tr>
-			<td colspan="1" style="text-align:left; font-size:1.5em;">제목 </td>
-			<td colspan="7" style="text-align:left; font-size:1.5em;">${dtos.btitle }</td>
-		</tr>
-		<tr>
-			<td colspan="1" style="height: 200px; text-align: left;">본문</td>
-			<td colspan="7" style="height: 200px; text-align: left;">${dtos.bcontent }</td>
-		</tr>
-		<c:if test="${not empty dtos.bfilename }">
-		<tr>
-			<td colspan="8"><img src="${conPath }/freeboardUp/${dtos.bfilename}" alt="${dtos.bfilename }등록사진" width="150px"><br></td>
-		</tr>
+	<div class="small_text" style="float:left;">
+		 ${dtos.mname } * ${dtos.brdate }
+	</div>
+	<div class="right" style="float:right;">
+		<c:if test="${member.mid eq dtos.mid }">
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${dtos.bno }'">수정</button>
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${dtos.bno }'">삭제</button>
 		</c:if>
-		<tr>
-		</tr>
-		<tr>
-			<td colspan="8" style="text-align:right;">
-			<b>작성자 :</b> ${dtos.mname }<br>
-			작성일 : ${dtos.brdate }
-			</td>
-		</tr>
-		<tr>
-			<td colspan="8" style="text-align:right;">
-			<c:if test="${member.mid eq dtos.mid }">
-				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardModifyView.do?bno=${dtos.bno }'">수정</button>
-				<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${dtos.bno }'">삭제</button>
-			</c:if>
-			<c:if test="${member.mid != dtos.mid }">
-			<button class="btn btn-primary" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${dtos.bno }'">답변작성</button>
-			</c:if>
-			</td>
-		</tr>
-	</table>
+		<c:if test="${not empty admin }">
+			<button class="gray_btn" onclick="location.href='${conPath}/freeBoardDelete.do?bno=${dtos.bno }'">삭제</button>
+		</c:if>
+		<c:if test="${member.mid != dtos.mid && empty admin}">
+			<button class="blue_btn" onclick="location.href='${conPath}/freeBoardReplyView.do?bno=${dtos.bno }'">답변작성</button>
+		</c:if>
+	</div>
+	<br>	
+
+</div>
 	</c:forEach>
 </c:if>
+	
 	
 	
 <jsp:include page="../main/footer.jsp"/>

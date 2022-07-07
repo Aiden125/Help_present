@@ -17,9 +17,11 @@ public class BlikeService implements Service {
 		int result = dao.checkLike(mid, bno);
 		if(result == 0) {
 			dao.hitLike(mid, bno);
+			fDao.bLikeUp(bno);
 			fDao.hitDown(bno);
 		}else {
 			dao.deleteLike(mid, bno);
+			fDao.bLikeDown(bno);
 			fDao.hitDown(bno);
 		}
 	}

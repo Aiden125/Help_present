@@ -53,7 +53,29 @@
 			</tr>
 			<tr>
 				<td colspan="2"><p class="left">나의MBTI</p>
-				<input type="text" class="box" value="${member.mmbti }" name="mmbti"></td>
+				<select name="mmbti" class="box">
+					<option value="미등록">선택</option>
+					<option ${member.mmbti == "ENTP" ? "selected":""}>ENTP</option>
+					<option ${member.mmbti == "ENTJ" ? "selected":""}>ENTJ</option>
+					<option ${member.mmbti == "ENFP" ? "selected":""}>ENFP</option>
+					<option ${member.mmbti == "ENFJ" ? "selected":""}>ENFJ</option>
+					<option ${member.mmbti == "ESTP" ? "selected":""}>ESTP</option>
+					<option ${member.mmbti == "ESTJ" ? "selected":""}>ESTJ</option>
+					<option ${member.mmbti == "ESFP" ? "selected":""}>ESFP</option>
+					<option ${member.mmbti == "ESFJ" ? "selected":""}>ESFJ</option>
+					
+					<option ${member.mmbti == "INTP" ? "selected":""}>INTP</option>
+					<option ${member.mmbti == "INTJ" ? "selected":""}>INTJ</option>
+					<option ${member.mmbti == "INFP" ? "selected":""}>INFP</option>
+					<option ${member.mmbti == "INFJ" ? "selected":""}>INFJ</option>
+					<option ${member.mmbti == "ISTP" ? "selected":""}>ISTP</option>
+					<option ${member.mmbti == "ISTJ" ? "selected":""}>ISTJ</option>
+					<option ${member.mmbti == "ISFP" ? "selected":""}>ISFP</option>
+					<option ${member.mmbti == "ISFJ" ? "selected":""}>ISFJ</option>
+					
+					<option value="미등록">모름</option>
+				</select>
+				<%-- <input type="text" class="box" value="${member.mmbti }" name="mmbti"></td> --%>
 			</tr>
 			<tr>
 				<td colspan="2"><p class="left">이메일</p>

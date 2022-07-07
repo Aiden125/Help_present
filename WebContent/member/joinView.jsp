@@ -131,29 +131,50 @@
 			<tr>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">아이디</p><input type="text" class="box" name="mid" required="required">
+				<td colspan="2"><p class="left">아이디 <span class="red">*</span> </p><input type="text" class="box" name="mid" required="required">
 				<div id="idCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">비밀번호</p>
+				<td colspan="2"><p class="left">비밀번호 <span class="red">*</span></p>
 				<input type="password" class="box" name="mpw" required="required"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">비밀번호확인</p>
+				<td colspan="2"><p class="left">비밀번호확인 <span class="red">*</span></p>
 				<input type="password" class="box" name="mpwChk" required="required">
 				<div id="pwCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">닉네임</p>
+				<td colspan="2"><p class="left">닉네임 <span class="red">*</span></p>
 				<input type="text" class="box" name="mname" required="required">
 				<div id="nameCheckResult"> &nbsp; </div></td>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">나의 MBTI</p>
-				<input type="text" class="box" name="mmbti"></td>
+				<td colspan="2"><p class="left">나의 MBTI <span class="red">*</span></p>
+				<select name="mmbti" class="box">
+					<option value="미등록">선택</option>
+					<option>ENTP</option>
+					<option>ENTJ</option>
+					<option>ENFP</option>
+					<option>ENFJ</option>
+					<option>ESTP</option>
+					<option>ESTJ</option>
+					<option>ESFP</option>
+					<option>ESFJ</option>
+					
+					<option>INTP</option>
+					<option>INTJ</option>
+					<option>INFP</option>
+					<option>INFJ</option>
+					<option>ISTP</option>
+					<option>ISTJ</option>
+					<option>ISFP</option>
+					<option>ISFJ</option>
+					
+					<option value="미등록">모름</option>
+				</select>
 			</tr>
 			<tr>
-				<td colspan="2"><p class="left">이메일</p>
+				<td colspan="2"><p class="left">이메일 <span class="red">*</span></p>
 				<input type="text" class="box" name="memail" required="required">
 				<div id="emailCheckResult"> &nbsp; </div></td>
 			</tr>
