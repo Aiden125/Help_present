@@ -57,8 +57,16 @@ SELECT *
     FROM (SELECT ROWNUM RN, A.*
         FROM(SELECT *
                 FROM MEMBER
+                WHERE mMBTI LIKE '%'||UPPER('')||'%' 
                 ORDER BY mLIKE DESC) A)
-    WHERE mNAME LIKE '%'||'홍'||'%' AND RN BETWEEN 1 AND 5;
+    WHERE RN BETWEEN 1 AND 5;
+
+SELECT * FROM MEMBER;
+
+-- 11-2 검색된 멤버 수
+SELECT count(*) TOTCNT
+    FROM MEMBER
+    WHERE mMBTI LIKE '%'||UPPER('i')||'%';
 
 -- 12. 회원 상세보기(조회수 올리기 포함한)
 SELECT * FROM MEMBER WHERE mID='aaa';

@@ -75,6 +75,11 @@ li{
 	padding:20px;
 	border-radius:0.25rem;
 }
+.small_wrap_search{
+	width:840px;
+	margin:5px auto;
+	border-radius:0.25rem;
+}
 .small_wrap_q{
 	width:800px;
 	margin:5px auto;

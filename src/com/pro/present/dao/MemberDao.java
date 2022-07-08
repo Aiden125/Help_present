@@ -234,51 +234,53 @@ public class MemberDao {
 		return result;
 	}
 	
-	// 5-1. 회원리스트 보기
-		public ArrayList<MemberDto> listMember(int startRow, int endRow){
-			ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String sql = "SELECT * " + 
-					"    FROM (SELECT ROWNUM RN, A.* " + 
-					"        FROM(SELECT * " + 
-					"                FROM MEMBER " + 
-					"                ORDER BY mLIKE DESC) A) " + 
-					"    WHERE RN BETWEEN ? AND ?";
-			try {
-				conn = ds.getConnection();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);
-				rs = pstmt.executeQuery();
-				while(rs.next()){
-					String mid = rs.getString("mid");
-					String mpw = rs.getString("mpw");				
-					String mname = rs.getString("mname");		
-					String mphoto = rs.getString("mphoto");
-					Date mbirth = rs.getDate("mbirth");
-					String mgender = rs.getString("mgender");
-					String memail = rs.getString("memail");
-					String mmbti = rs.getString("mmbti");
-					Date mrdate = rs.getDate("mrdate");
-					int mlike = rs.getInt("mlike");
-					int mwritecount = rs.getInt("mwritecount");
-					dtos.add(new MemberDto(mid, mpw, mname, mphoto, mbirth, mgender, memail, mmbti, mrdate, mlike, mwritecount));
-				}
-			} catch (SQLException e) {
-				System.out.println(e.getMessage()+dtos);
-			} finally {
-				try {
-					if(rs!=null) rs.close();
-					if(pstmt!=null) pstmt.close();
-					if(conn!=null) conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+	// 5-1. 회원리스트 보기(검색된 회원 포함)
+	public ArrayList<MemberDto> listMember(String searchword, int startRow, int endRow){
+		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * " + 
+				"    FROM (SELECT ROWNUM RN, A.* " + 
+				"        FROM(SELECT * " + 
+				"                FROM MEMBER " + 
+				"                WHERE mMBTI LIKE '%'||UPPER(?)||'%'  " + 
+				"                ORDER BY mLIKE DESC) A) " + 
+				"    WHERE RN BETWEEN ? AND ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				String mid = rs.getString("mid");
+				String mpw = rs.getString("mpw");				
+				String mname = rs.getString("mname");		
+				String mphoto = rs.getString("mphoto");
+				Date mbirth = rs.getDate("mbirth");
+				String mgender = rs.getString("mgender");
+				String memail = rs.getString("memail");
+				String mmbti = rs.getString("mmbti");
+				Date mrdate = rs.getDate("mrdate");
+				int mlike = rs.getInt("mlike");
+				int mwritecount = rs.getInt("mwritecount");
+				dtos.add(new MemberDto(mid, mpw, mname, mphoto, mbirth, mgender, memail, mmbti, mrdate, mlike, mwritecount));
 			}
-			return dtos;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage()+dtos);
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		return dtos;
+	}
 		
 		
 	// 5-2. 회원리스트 검색
@@ -370,20 +372,23 @@ public class MemberDao {
 	
 	
 	// 7. 회원 수 보기
-	public int totalMember() {
+	public int totalMember(String searchword) {
 		int totCnt = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) TOTCNT FROM MEMBER";
+		String sql = "SELECT count(*) TOTCNT" + 
+				"    FROM MEMBER " + 
+				"    WHERE mMBTI LIKE '%'||UPPER(?)||'%'";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchword);
 			rs = pstmt.executeQuery();
 			rs.next();
 			totCnt = rs.getInt("totcnt");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+"totCnt");
 		} finally {
 			try {
 				if(rs!=null) rs.close();

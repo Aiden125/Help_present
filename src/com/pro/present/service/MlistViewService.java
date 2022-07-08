@@ -14,6 +14,10 @@ public class MlistViewService implements Service {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// PAGESIZE = 3 , BLOCKSIZE = 5
 			String pageNum = request.getParameter("pageNum");
+			String searchword = request.getParameter("searchword");
+			if(searchword == null) {
+				searchword = "";
+			}
 			if(pageNum==null) {
 				pageNum="1";
 			}
@@ -23,10 +27,10 @@ public class MlistViewService implements Service {
 			int endRow = startRow + PAGESIZE -1; // // 끝나는 번째 수
 			
 			MemberDao mDao = MemberDao.getInstance();
-			ArrayList<MemberDto> members = mDao.listMember(startRow, endRow);
+			ArrayList<MemberDto> members = mDao.listMember(searchword, startRow, endRow);
 			request.setAttribute("list", members);
 			
-			int totalCnt = mDao.totalMember(); // 등록된 멤버 수
+			int totalCnt = mDao.totalMember(searchword); // 등록된 멤버 수
 			int	pageCnt = (int) Math.ceil((double)totalCnt/PAGESIZE); // 페이지 갯수
 			int startPage = ((currentPage-1)/BLOCKSIZE)*BLOCKSIZE+1; // 시작 페이지
 			int endPage = startPage + BLOCKSIZE -1;

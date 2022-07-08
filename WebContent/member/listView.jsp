@@ -13,8 +13,14 @@
 	<script>
 		$(document).ready(function(){
 			
+			// 필터링
+			$('#searchword').on('change', function(){
+				var searchword = $(this).val();
+				location.href="${conPath}/memberListView.do?searchword="+searchword;
+			});
 		});
 	</script>
+
 </head>
 <c:if test="${memberLikeResult eq '로그인 해주세요'}">
 	<script>
@@ -27,9 +33,44 @@
 <jsp:include page="../main/header.jsp"/>
 <div id="content_top">
 	<div class="caption">
-		전체 회원목록
+		${param.searchword } 회원 목록
 	</div>
 </div>
+<br>
+
+
+<!-- 필터링 메뉴 -->
+<div class="small_wrap_search">
+		<div class="left">
+			<form action="${conPath }/memberListView.do" method="post">
+				<select name="searchword" id="searchword">
+					<option value="">선택</option>
+					<option ${param.searchword == "ENTP" ? "selected":""}>ENTP</option>
+					<option ${param.searchword == "ENTJ" ? "selected":""}>ENTJ</option>
+					<option ${param.searchword == "ENFP" ? "selected":""}>ENFP</option>
+					<option ${param.searchword == "ENFJ" ? "selected":""}>ENFJ</option>
+					<option ${param.searchword == "ESTP" ? "selected":""}>ESTP</option>
+					<option ${param.searchword == "ESTJ" ? "selected":""}>ESTJ</option>
+					<option ${param.searchword == "ESFP" ? "selected":""}>ESFP</option>
+					<option ${param.searchword == "ESFJ" ? "selected":""}>ESFJ</option>
+					
+					<option ${param.searchword == "INTP" ? "selected":""}>INTP</option>
+					<option ${param.searchword == "INTJ" ? "selected":""}>INTJ</option>
+					<option ${param.searchword == "INFP" ? "selected":""}>INFP</option>
+					<option ${param.searchword == "INFJ" ? "selected":""}>INFJ</option>
+					<option ${param.searchword == "ISTP" ? "selected":""}>ISTP</option>
+					<option ${param.searchword == "ISTJ" ? "selected":""}>ISTJ</option>
+					<option ${param.searchword == "ISFP" ? "selected":""}>ISFP</option>
+					<option ${param.searchword == "ISFJ" ? "selected":""}>ISFJ</option>
+					
+					<option value="">전체보기</option>
+				</select>
+			</form>	
+		</div>
+</div>
+
+
+
 	<c:forEach var="dto" items="${list }">
 	
 		<c:if test="${list.size() eq 0 }">
