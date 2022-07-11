@@ -1,8 +1,2 @@
-<<<<<<< HEAD
-<h2>공부 일기 공간입니다.</h2>
-공부 루트<br>
-java - dbms<br>
-webstandard<br>
-html - css - javascript<br>
-jsp<br>
-spring - spring boot<br>
+<h2>개인프로젝트</h2>
+MBTI별 선물 추천 커뮤니티입니다
