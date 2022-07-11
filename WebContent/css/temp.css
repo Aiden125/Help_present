@@ -1,0 +1,176 @@
+@CHARSET "UTF-8";
+
+/* 초기화 */
+*{
+	margin:0;
+	padding:0;
+}
+
+/* 헤더 */
+#nav_wrap{
+	background-color:black;
+	height:60px;
+	line-height:60px;
+}
+#nav_bar{
+	width:60%;
+	color:white;
+	margin:0 auto;
+}
+#nav_bar_title{
+	font-size:16pt;
+	color:white;
+	float:left;
+}
+.nav_item{
+	float:right;
+	font-size:12pt;
+	margin:0 10px;
+}
+.nav-link{
+	text-decoration:none;
+	color:white;
+}
+a{
+	text-decoration:none;
+	color:blue;
+}
+li{
+	list-style:none;
+}
+
+/* 푸터 */
+#footer{
+	height:100px;
+	line-height:100px;
+	background-color:black;
+	color:white;
+	font-size:12pt;
+	margin:0 auto;
+	text-align:center;
+}
+
+/* 바디 */
+#big_wrap{
+	width:1200px;
+	margin:50px auto;
+	border:2px solid lightgray;
+}
+#big_wrap_list{
+	width:1200px;
+	margin:0px auto;
+	border:2px solid lightgray;
+}
+#small_wrap{
+	width:800px;
+	margin:50px auto;
+	border:2px solid lightgray;
+	padding:20px;
+}
+#mini_wrap{
+	width:400px;
+	margin:50px auto;
+	border:2px solid lightgray;
+	padding:20px;
+}
+
+table{
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	border-collapse:collapse;
+}
+tr{
+	height:50px;
+}
+.underline{
+	border-bottom:1px solid black;
+}
+.box{
+	width:100%;
+	height:30px;
+}
+.middle_box{
+	width:150px;
+	height:22px;
+}
+.left{
+	text-align:left;
+}
+.center{
+	text-align:center;
+}
+.right{
+	text-align:right;
+}	
+th,
+td{
+	margin:10px;
+	padding:10px;
+}
+caption{
+	font-size:1.5em;
+}
+.btn{
+	
+}
+.blue_btn{
+	width:70px;
+	height:40px;
+	vertical-align:middle;
+	background-color:#0D6EFD;
+	border-color:#0D6EFD;
+	color:white;
+	border-radius:0.25rem;
+	font-size:14px;
+	display:line-block;
+	text-align:center;
+}
+.big_blue_btn{
+	width:120px;
+	height:50px;
+	vertical-align:middle;
+	background-color:#0D6EFD;
+	border-color:#0D6EFD;
+	color:white;
+	border-radius:0.25rem;
+	font-size:21px;
+	display:line-block;
+	text-align:center;
+}
+input:focus{
+	outline:none;
+}
+#content_top{
+	width:1000px;
+	margin:10px auto;
+	margin-top:50px;
+	text-align:right;
+}
+#content_bottom{
+	width:1000px;
+	height:50px;
+	margin:0 auto;
+	text-align:right;
+}
+.paging{
+	height:50px;
+	vertical-align:middle;
+	text-align:center;
+}
+#content3{
+	margin
+}
+.gray_btn{
+	width:70px;
+	height:30px;
+	vertical-align:middle;
+	background-color:lightgray;
+	border-color:lightgray;
+	color:black;
+	font-weight:bold;
+	border-radius:0.25rem;
+	font-size:14px;
+	display:line-block;
+	text-align:center;
+}
