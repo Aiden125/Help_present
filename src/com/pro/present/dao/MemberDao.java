@@ -19,12 +19,12 @@ public class MemberDao {
 	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
-	// ?���??��
+	// 싱글톤 적용
 	private static MemberDao instance = new MemberDao();
 	public static MemberDao getInstance() {
 		return instance;
 	}
-	// 커넥?��??
+	// 커넥션풀 적용
 	private MemberDao() {
 		try {
 			Context ctx = new InitialContext();
@@ -34,7 +34,7 @@ public class MemberDao {
 		} 
 	}
 	
-	// 0. ?��?��?�� 중복체크
+	// 0. 닉네임 중복체크
 	public int checkName(String mname) {
 		int result = FAIL;
 		Connection conn = null;
@@ -65,7 +65,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	// 0. ?��메일 중복체크
+	// 0. 이메일 충복체크
 	public int checkEmail(String memail) {
 		int result = FAIL;
 		Connection conn = null;
@@ -97,7 +97,7 @@ public class MemberDao {
 	}
 		
 		
-	// 1. ?��?��?�� 중복체크
+	// 1. 아이디 중복체크
 	public int checkId(String mid) {
 		int result = FAIL;
 		Connection conn = null;
@@ -128,7 +128,7 @@ public class MemberDao {
 		return result;
 	}
 		
-	// 2. dto ?���? �??��?���?
+	// 2. 멤버 DTO 정보 가져오기
 	public MemberDto getMemberDto(String mid) {
 		MemberDto dto = null;
 		Connection conn = null;
@@ -169,7 +169,7 @@ public class MemberDao {
 				
 				
 				
-	// 3. 로그?��
+	// 3. 로그인 하기
 	public int login(String mid, String mpw ) {
 		int result = FAIL;
 		Connection conn = null;
@@ -202,7 +202,7 @@ public class MemberDao {
 	}
 	
 	
-	// 4. ?��?���??��
+	// 4. 회원가입
 	public int joinMember(MemberDto dto) {
 		int result = FAIL;
 		Connection conn = null;
@@ -234,7 +234,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	// 5-1. ?��?��리스?�� 보기(�??��?�� ?��?�� ?��?��)
+	// 5-1. 회원리스트
 	public ArrayList<MemberDto> listMember(String searchword, int startRow, int endRow){
 		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
 		Connection conn = null;
@@ -283,7 +283,7 @@ public class MemberDao {
 	}
 		
 		
-	// 5-2. ?��?��리스?�� �??��
+	// 5-2. 회원 검색하기
 	public ArrayList<MemberDto> searchMember(String mname, int startRow, int endRow){
 		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
 		Connection conn = null;
@@ -331,7 +331,7 @@ public class MemberDao {
 	}
 		
 		
-	// 6. ?��?��?��보수?��
+	// 6. 회원정보 수정하기
 	public int modifyMember(MemberDto dto) {
 		int result = FAIL;
 		Connection conn = null;
@@ -371,7 +371,7 @@ public class MemberDao {
 	}
 	
 	
-	// 7. ?��?�� ?�� 보기
+	// 7. 총 멤버 수
 	public int totalMember(String searchword) {
 		int totCnt = 0;
 		Connection conn = null;
@@ -402,7 +402,7 @@ public class MemberDao {
 	}
 	
 	
-	// 9. 좋아?�� ?��리기
+	// 9. 멤버 추천하기
 	public void mLikeUp(String mid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -424,7 +424,7 @@ public class MemberDao {
 		}
 	}
 	
-	// 9. 좋아?�� ?��리기
+	// 9. 멤버 추천 취소하기
 	public void mLikeDown(String mid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -447,7 +447,7 @@ public class MemberDao {
 	}
 	
 	
-	// 10. �??�� �??�� ?��리기
+	// 10. 글쓴 갯수 올리기
 	public void writecountUp(String mid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -470,7 +470,7 @@ public class MemberDao {
 	}
 	
 		
-	// 12. ?��?�� ?��?��보기
+	// 12. 멤버 상세보기
 	public MemberDto detailsMember(String mid) {
 		MemberDto dto = null;
 		Connection conn = null;

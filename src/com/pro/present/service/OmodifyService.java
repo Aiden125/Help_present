@@ -16,9 +16,9 @@ public class OmodifyService implements Service {
 		OneBoardDao oDao = OneBoardDao.getInstance();
 		int result = oDao.modify(obno, obtitle, obcontent, obip);
 		if(result == oDao.SUCCESS) {
-			request.setAttribute("oModifyResult", "�? ?��?�� ?���?");
+			request.setAttribute("oModifyResult", "글수정 성공");
 		}else {
-			request.setAttribute("oModifyResult", "�? ?��?�� ?��?��");
+			request.setAttribute("oModifyResult", "글수정 실패");
 		}
 	}
 

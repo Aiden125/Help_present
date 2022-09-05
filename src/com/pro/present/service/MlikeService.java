@@ -18,7 +18,7 @@ public class MlikeService implements Service {
 		String mmyid = request.getParameter("mmyid");
 		MemberLikeDao dao = MemberLikeDao.getInstance();
 		if(mmyid.equals("")) {
-			request.setAttribute("memberLikeResult", "로그?�� ?��주세?��");
+			request.setAttribute("memberLikeResult", "로그인 해주세요");
 		}else {
 			int result = dao.checkLike(mid, mmyid);
 			if(result == 0) {

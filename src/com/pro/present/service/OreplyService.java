@@ -24,12 +24,12 @@ public class OreplyService implements Service {
 			OneBoardDao oDao = OneBoardDao.getInstance();
 			int result = oDao.reply(mid, obtitle, obcontent, obip, obgroup, obstep, obgetname);
 			if(result == oDao.SUCCESS) {
-				request.setAttribute("oReplyResult", "?���??��?�� ?���?");
+				request.setAttribute("oReplyResult", "답변 성공");
 			}else {
-				request.setAttribute("oReplyResult", "?���??��?�� ?��?��");				
+				request.setAttribute("oReplyResult", "답변 실패");				
 			}
 		}else {
-			request.setAttribute("oReplyResult", "로그?�� ?��주세?��");
+			request.setAttribute("oReplyResult", "로그인 해주세요");
 		}
 
 	}

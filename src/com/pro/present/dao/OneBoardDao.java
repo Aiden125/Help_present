@@ -19,12 +19,12 @@ public class OneBoardDao {
 	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
-	// ?���??��
+	// 싱글톤
 	private static OneBoardDao instance = new OneBoardDao();
 	public static OneBoardDao getInstance() {
 		return instance;
 	}
-	// 커넥?��??
+	// 커넥션풀
 	private OneBoardDao() {
 		try {
 			Context ctx = new InitialContext();
@@ -35,7 +35,7 @@ public class OneBoardDao {
 	}
 	
 	
-	// 1-1. ?���? 질문?�� 리스?��
+	// 1-1. 일대일 요청한 리스트
 	public ArrayList<OneBoardDto> requestListBoard(String mid, int startRow, int endRow){
 		ArrayList<OneBoardDto> dtos = new ArrayList<OneBoardDto>();
 		Connection conn = null;
@@ -84,7 +84,7 @@ public class OneBoardDao {
 		return dtos;
 	}
 	
-	// 1-2. ?���? 질문 받�? 리스?��
+	// 1-2. 일대일 질문 받은 리스트
 		public ArrayList<OneBoardDto> responseListBoard(String mid, int startRow, int endRow){
 			ArrayList<OneBoardDto> dtos = new ArrayList<OneBoardDto>();
 			Connection conn = null;
@@ -135,7 +135,7 @@ public class OneBoardDao {
 			return dtos;
 		}
 	
-	// 2-1. ?���? 질문?�� �? �??��
+	// 2-1. 질문한 갯수
 	public int requestTotalCnt(String mid) {
 		int totalCnt = 0;
 		Connection conn = null;
@@ -166,7 +166,7 @@ public class OneBoardDao {
 		return totalCnt;
 	}
 	
-	// 2-2. ?���? 질문받�? �? �??��
+	// 2-2. 질문 받은 갯수
 		public int responseTotalCnt(String mid) {
 			int totalCnt = 0;
 			Connection conn = null;
@@ -199,7 +199,7 @@ public class OneBoardDao {
 		}
 	
 	
-	// 3. ?��???�� 게시?�� 질문?���?
+	// 3. 일대일 질문 작성하기
 	public int writeOneBoard(String mid, String obtitle, String obcontent, String obip, String obgetname) {
 		int result = FAIL;
 		Connection conn = null;
@@ -254,11 +254,11 @@ public class OneBoardDao {
 		}
 	}
 	
-	// 5-1. ?���?�? ?��면서 ?��?�� 바꿔주기
+	// 5-1. 상태 변경하기
 	private void updateStatus(int obgroup) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE ONEBOARD SET obANSWER = '?���??���?' WHERE obGROUP=?";
+		String sql = "UPDATE ONEBOARD SET obANSWER = '답변완료' WHERE obGROUP=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -276,7 +276,7 @@ public class OneBoardDao {
 		}
 	}
 
-	// 5. ?���?�? ?���?
+	// 5. 일대일 질문 답변하기
 	public int reply(String mid, String obtitle, String obcontent, 
 						String obip, int obgroup, int obstep, String obgetname) {
 		int result = FAIL;
@@ -312,7 +312,7 @@ public class OneBoardDao {
 		return result;
 	}
 	
-	// 6-1. �??���??��?�� ?��?���? ?��?��보기
+	// 6-1. 일대일 질문 원글 상세보기
 	public OneBoardDto contentViewOnlyOne(int obno) {
 		OneBoardDto dto = null;
 		Connection conn = null;
@@ -356,7 +356,7 @@ public class OneBoardDao {
 		return dto;
 	}
 	
-	// 6-2 ?���?�? ?��?��보기
+	// 6-2 일대일질문 상세보기
 	public OneBoardDto contentView(int obno, int obgroup) {
 		OneBoardDto dto = null;
 		Connection conn = null;
@@ -401,7 +401,7 @@ public class OneBoardDao {
 	}
 	
 	
-	// 7. ?���??�� ?��?��보기
+	// 7. 일대일 질문 답변들 보기
 	public ArrayList<OneBoardDto> replyListView(int obgroup){
 		ArrayList<OneBoardDto> dtos = new ArrayList<OneBoardDto>();
 		Connection conn = null;
@@ -447,7 +447,7 @@ public class OneBoardDao {
 	}
 
 	
-	// 8. �? ?��?��
+	// 8. 수정하기
 	public int modify(int obno, String obtitle, String obcontent, String obip) {
 		int result = FAIL;
 		Connection conn = null;
@@ -477,7 +477,7 @@ public class OneBoardDao {
 		return result;
 	}
 	
-	// 9. �? ?��?��
+	// 9. 삭제하기
 	public int delete(int obno) {
 		int result = FAIL;
 		Connection conn = null;

@@ -20,12 +20,12 @@ public class ReplyDao {
 	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
-	// ?���??��
+	// 싱글톤
 	private static ReplyDao instance = new ReplyDao();
 	public static ReplyDao getInstance() {
 		return instance;
 	}
-	// 커넥?��??
+	// 커넥션풀
 	private ReplyDao() {
 		try {
 			Context ctx = new InitialContext();
@@ -35,7 +35,7 @@ public class ReplyDao {
 		} 
 	}
 	
-	// 1. ?���??���?
+	// 1. 댓글쓰기
 	public int writeReply(String mid, int bno, String rcontent, String rip) {
 		int result = FAIL;
 		Connection conn = null;
@@ -64,7 +64,7 @@ public class ReplyDao {
 	}
 	
 	
-	// 2. ?���??��?��
+	// 2. 댓글수정
 	public int modifyReply(int rno, String rcontent) {
 		int result = FAIL;
 		Connection conn = null;
@@ -90,7 +90,7 @@ public class ReplyDao {
 		return result;
 	}
 	
-	// 3. ?���??��?��
+	// 3. 댓글삭제
 	public int deleteReply(int rno) {
 		int result = FAIL;
 		Connection conn = null;
@@ -114,7 +114,7 @@ public class ReplyDao {
 		return result;
 	}
 	
-	// 4. ?���? 리스?�� 보기
+	// 4. 댓글리스트
 	public ArrayList<ReplyDto> replyList(int bno, int bgroup){
 		ArrayList<ReplyDto> dtos = new ArrayList<ReplyDto>();
 		Connection conn = null;

@@ -13,9 +13,9 @@ public class BdeleteService implements Service {
 		FreeBoardDao fDao = FreeBoardDao.getInstance();
 		int result = fDao.delete(bno);
 		if(result == fDao.SUCCESS) {
-			request.setAttribute("deleteResult", "�??��?�� ?���?");			
+			request.setAttribute("deleteResult", "게시글작성 성공");			
 		}else {
-			request.setAttribute("deleteResult", "�??��?�� ?��?��");
+			request.setAttribute("deleteResult", "게시글작성 실패");
 		}
 	}
 }

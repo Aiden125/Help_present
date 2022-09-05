@@ -53,15 +53,16 @@ public class MmodifyService implements Service {
 			if (result == MemberDao.SUCCESS) {
 				HttpSession session = request.getSession();
 				session.setAttribute("member", member);
-				request.setAttribute("modifyResult", "?��?��?���? ?��?�� ?���?");
+				request.setAttribute("modifyResult", "정보수정 성공");
 			} else {
-				request.setAttribute("modifyResult", "?��?��?���? ?��?�� ?��?��");
+				request.setAttribute("modifyResult", "정보수정 실패");
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		// ?��버에 ?��로드?�� ?��?��?�� ?��?�� ?��?���? 복사
+
+
 		File serverFile = new File(path + "/" + mphoto);
 		if (serverFile.equals("NOIMG.JPG") && serverFile.exists()) {
 			InputStream is = null;

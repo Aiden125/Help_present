@@ -45,16 +45,17 @@ public class BmodifyService implements Service {
 				int result = fDao.modify(bno, bmbti, btitle, bcontent, bfilename, bip);
 				
 				if(result == fDao.SUCCESS) {
-					request.setAttribute("modifyResult", "�??��?�� ?���?");
+					request.setAttribute("modifyResult", "게시글수정 성공");
 				}else {
-					request.setAttribute("modifyResult", "�??��?�� ?��?��");
+					request.setAttribute("modifyResult", "게시글수정 실패");
 				}
 				request.setAttribute("pageNum", mRequest.getParameter("pageNum"));
 		}catch(Exception e) {
 				System.out.println(e.getMessage());
 				request.setAttribute("modifyResult", "�??��?�� ?��?��");
 		}
-		// ?��?�� 카피
+
+
 		if(dbfilename!=null && bfilename.equals(dbfilename)) {
 			InputStream is = null;
 			OutputStream os = null;

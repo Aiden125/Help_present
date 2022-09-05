@@ -49,18 +49,18 @@ public class BreplyService implements Service {
 				int result = fDao.reply(mid, bmbti, btitle, bcontent, bfilename, bip, bgroup, bstep, bindent);
 				
 				if(result == fDao.SUCCESS) {
-					request.setAttribute("replyResult", "?���??���? ?���?");
+					request.setAttribute("replyResult", "게시글답변 성공");
 				}else {
-					request.setAttribute("replyResult", "?���??���? ?��?��");
+					request.setAttribute("replyResult", "게시글답변 실패");
 				}
 			}else {
-				request.setAttribute("replyResult", "로그?�� ?��주세?��");
+				request.setAttribute("replyResult", "로그인 해주세요");
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		// ?��?�� 카피
+
 		if(bfilename!=null) {
 			InputStream is = null;
 			OutputStream os = null;

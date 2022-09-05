@@ -15,7 +15,7 @@ public class MemberLikeDao {
 	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
-	// ?���??��
+	// 싱글톤
 	private static MemberLikeDao instance = new MemberLikeDao();
 	public static MemberLikeDao getInstance() {
 		return instance;
@@ -29,7 +29,7 @@ public class MemberLikeDao {
 		}
 	}
 	
-	// 1. 좋아?�� ?���? ?��?��
+	// 1. 멤버 추천하기
 	public int hitLike(String mid, String mmyid) {
 		int result = FAIL;
 		Connection conn = null;
@@ -58,7 +58,7 @@ public class MemberLikeDao {
 	}
 	
 	
-	// 2. 좋아?�� ?��거하�?
+	// 2. 멤버 추천 취소하기
 	public int deleteLike(String mid, String mmyid) {
 		int result = FAIL;
 		Connection conn = null;
@@ -86,7 +86,7 @@ public class MemberLikeDao {
 		return result;
 	}
 	
-	// 3. ?��???���? ?��?��
+	// 3. 멤버 추천 했는지 안했는지
 	public int checkLike(String mid, String mmyid) {
 		int totCnt = 0;
 		Connection conn = null;

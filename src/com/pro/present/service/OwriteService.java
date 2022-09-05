@@ -20,16 +20,16 @@ public class OwriteService implements Service {
 			String obcontent = request.getParameter("obcontent");
 			String obip = request.getRemoteAddr();
 			String obgetname = request.getParameter("mname");
-			// String mid =; 
+
 			OneBoardDao oDao = OneBoardDao.getInstance();
 			int result = oDao.writeOneBoard(mid, obtitle, obcontent, obip, obgetname);
 			if(result == oDao.SUCCESS) {
-				request.setAttribute("oWriteResult", "질문?���? ?���?");
+				request.setAttribute("oWriteResult", "질문작성 성공");
 			}else{
-				request.setAttribute("oWriteResult", "질문?���? ?��?��");			
+				request.setAttribute("oWriteResult", "질문작성 실패");			
 			}
 		}else {
-			request.setAttribute("oWriteResult", "로그?�� ?��주세?��");
+			request.setAttribute("oWriteResult", "로그인 해주세요");
 		}
 	}
 }

@@ -17,7 +17,7 @@ public class AdminDao {
 	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
-	// ?���??��
+	// 싱글톤  적용
 	private static AdminDao instance = new AdminDao();
 	public static AdminDao getInstance() {
 		return instance;
@@ -32,7 +32,7 @@ public class AdminDao {
 	}
 	
 	
-	// 1. 로그?��
+	// 1. 관리자 로그인
 	public int adminLogin(String aid, String apw) {
 		int result = FAIL;
 		Connection conn = null;
@@ -65,7 +65,7 @@ public class AdminDao {
 	}
 	
 	
-	// 2. �?리자 추�?
+	// 2. 관리자 회원가입
 	public int adminJoin(String aid, String apw, String aname) {
 		int result = FAIL;
 		Connection conn = null;
@@ -91,7 +91,7 @@ public class AdminDao {
 		return result;
 	}
 	
-	// 3. dto ?���? �??��?���?
+	// 3. 관리자 Dto 정보 가져오기
 	public AdminDto getAdminDto(String aid) {
 		AdminDto dto = null;
 		Connection conn = null;

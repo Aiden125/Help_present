@@ -46,18 +46,18 @@ public class BwriteService implements Service {
 				int result = fDao.write(mid, bmbti, btitle, bcontent, bfilename, bip);
 				
 				if(result == fDao.SUCCESS) {
-					request.setAttribute("writeResult", "�??���? ?���?");
+					request.setAttribute("writeResult", "게시글작성 성공");
 				}else {
-					request.setAttribute("writeResult", "�??���? ?��?��");
+					request.setAttribute("writeResult", "게시글작성 실패");
 				}
 			}else {
-				request.setAttribute("writeResult", "로그?�� ?��주세?��");
+				request.setAttribute("writeResult", "로그인 해주세요");
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		// ?��?�� 카피
+
 		if(bfilename!=null) {
 			InputStream is = null;
 			OutputStream os = null;

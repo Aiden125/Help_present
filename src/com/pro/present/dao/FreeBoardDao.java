@@ -20,7 +20,7 @@ public class FreeBoardDao {
 	public static final int FAIL = 0;	// ?��?���??��?��
 	private DataSource ds = null;
 	
-	// ?���??��
+	// 싱글톤 적용
 	private static FreeBoardDao instance = new FreeBoardDao();
 	public static FreeBoardDao getInstance() {
 		return instance;
@@ -34,7 +34,7 @@ public class FreeBoardDao {
 		} 
 	}
 	
-	// 1.�?목록
+	// 1. 자유게시판 리스트 가져오기
 	public ArrayList<FreeBoardDto> listBoard(String word, int startRow, int endRow){
 		ArrayList<FreeBoardDto> dtos = new ArrayList<FreeBoardDto>();
 		Connection conn = null;
@@ -92,7 +92,7 @@ public class FreeBoardDao {
 		return dtos;
 	}
 	
-	// 2-1. ?��체갯?��
+	// 2-1. 자유게시팔 총 갯수
 	public int getBoardTotalCnt() {
 		int totalCnt = 0;
 		Connection conn = null;
@@ -119,7 +119,7 @@ public class FreeBoardDao {
 		return totalCnt;
 	}
 	
-	// 2-2. �??��?�� �??��
+	// 2-2. 검색된 총 갯수
 	public int getBoardSearchCnt(String word) {
 		int totalCnt = 0;
 		Connection conn = null;
@@ -155,7 +155,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 3. ?��?��게시?�� ?���??���?
+	// 3. 자유게시판 글쓰기
 	public int write(String mid, String bmbti, String btitle, String bcontent, String bfilename, String bip) {
 		int result = FAIL;
 		Connection conn = null;
@@ -190,7 +190,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 4. ?���?�? ?���? ?�� step a
+	// 4. 답글달기 전 스텝
 	private void replyStep(int bgroup, int bstep) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -214,7 +214,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 5. ?���?�? ?���?
+	// 5. 답글달기
 	public int reply(String mid, String bmbti, String btitle, String bcontent, String bfilename,
 						String bip, int bgroup, int bstep, int bindent) {
 		int result = FAIL;
@@ -254,10 +254,10 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 6. bno�? dto�??��?���? = �? ?��?��보기(조회?�� ?��리기 ?��?��)
+	// 6. 상세보기(조회수 올리기 포함)
 	public FreeBoardDto contentViewAndHit(int bno, int bgroup) {
 		FreeBoardDto dto = null;
-		hitUp(bno); // �? ?��?��보기?�� ?��?��?��?���? hitUp
+		hitUp(bno); // 조회수 올리기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -302,7 +302,7 @@ public class FreeBoardDao {
 	
 	
 	
-	// 7-0. 조회?�� ?��리기
+	// 7-0. 조회수 올리기
 	private void hitUp(int bno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -323,7 +323,7 @@ public class FreeBoardDao {
 			}
 		}
 	}
-	// 7-1. 조회?�� ?��리기
+	// 7-1. 조회수 내리기
 	public void hitDown(int bno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -347,7 +347,7 @@ public class FreeBoardDao {
 		
 		
 	
-	// 7-2. 좋아?�� ?��리기
+	// 7-2. 좋아요 올리기
 	public void bLikeUp(int bno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -368,7 +368,7 @@ public class FreeBoardDao {
 			}
 		}
 	}
-	// 7-3. 좋아?�� ?��리기
+	// 7-3. 좋아요 내리기
 	public void bLikeDown(int bno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -391,7 +391,7 @@ public class FreeBoardDao {
 	}
 		
 	
-	// 8. bno�? dto�??��?���? = �? ?��?��보기(조회?�� ?��리기 미포?��)
+	// 8. 상세보기(조회수 변동 없이)
 	public FreeBoardDto contentView(int bno) {
 		FreeBoardDto dto = null;
 		Connection conn = null;
@@ -438,7 +438,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 9. ?���??�� ?��?��보기
+	// 9. 답변 리스트 보기
 	public ArrayList<FreeBoardDto> replyListView(int bgroup){
 		ArrayList<FreeBoardDto> dtos = new ArrayList<FreeBoardDto>();
 		Connection conn = null;
@@ -486,7 +486,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 10. �? ?��?��
+	// 10. 수정하기
 	public int modify(int bno, String bmbti, String btitle, String bcontent, String bfilename, String bip) {
 		int result = FAIL;
 		Connection conn = null;
@@ -520,7 +520,7 @@ public class FreeBoardDao {
 		return result;
 	}
 	
-	// 11. �? ?��?��
+	// 11. 삭제하기
 	public int delete(int bno) {
 		int result = FAIL;
 		Connection conn = null;
@@ -545,7 +545,7 @@ public class FreeBoardDao {
 	}
 	
 	
-	// 12. ?���?�??��
+	// 12. 답변갯수
 	public int replyCount(int bgroup) {
 		int totCnt = 0;
 		Connection conn = null;

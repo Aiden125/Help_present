@@ -49,22 +49,23 @@ public class MjoinService implements Service {
 			// mid 중복체크
 			int result = mDao.checkId(mid);
 
-			if (result == MemberDao.SUCCESS) { // �??���??��
+			if (result == MemberDao.SUCCESS) {
 				MemberDto member = new MemberDto(mid, mpw, mname, mphoto, mbirth, mgender, memail, mmbti, null, 0, 0);
 				mDao.joinMember(member);
 				if (result == MemberDao.SUCCESS) {
 					HttpSession session = request.getSession();
 					session.setAttribute("mid", mid);
-					request.setAttribute("joinResult", "?��?���??��?�� ?��료되?��?��?��?��");
+					request.setAttribute("joinResult", "회원가입 성공");
 				} else {
-					request.setAttribute("joinErrorMsg", "?��?���??��?�� ?��?��?��?��?��?��");
+					request.setAttribute("joinErrorMsg", "회원가입 실패");
 				}
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		// ?��버에 ?��로드?�� ?��?��?�� ?��?�� ?��?���? 복사
+
+
 		File serverFile = new File(path + "/" + mphoto);
 		if (serverFile.exists() && !mphoto.equals("NOIMG.JPG")) {
 			InputStream is = null;

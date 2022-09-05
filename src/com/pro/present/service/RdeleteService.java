@@ -14,9 +14,9 @@ public class RdeleteService implements Service {
 		
 		int result = rDao.deleteReply(rno);
 		if(result == rDao.SUCCESS) {
-			request.setAttribute("replyDeleteResult", "?���??��?�� ?���?");
+			request.setAttribute("replyDeleteResult", "댓글삭제 성공");
 		}else {			
-			request.setAttribute("replyDeleteResult", "?���??��?�� ?��?��");
+			request.setAttribute("replyDeleteResult", "댓글삭제 실패");
 		}
 	}
 }

@@ -21,12 +21,12 @@ public class RwriteService implements Service {
 			ReplyDao rDao = ReplyDao.getInstance();
 			int result = rDao.writeReply(mid, bno, rcontent, rip);
 			if(result == rDao.SUCCESS) {
-				request.setAttribute("replyResult", "?���??��?�� ?���?");			
+				request.setAttribute("replyResult", "댓글작성 성공");			
 			}else {
-				request.setAttribute("replyResult", "?���??��?�� ?��?��");						
+				request.setAttribute("replyResult", "댓글작성 실패");						
 			}
 		}else {
-			request.setAttribute("replyResult", "로그?�� ?��주세?��");
+			request.setAttribute("replyResult", "로그인 해주세요");
 		}
 	}
 }

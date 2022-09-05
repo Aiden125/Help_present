@@ -13,7 +13,6 @@ public class OresponseListViewService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		// list.do ?��?�� list.do?pageNum=2 ?��?�� list.do?pageNum=10
 		String mid = request.getParameter("mid");
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null) {
@@ -24,16 +23,16 @@ public class OresponseListViewService implements Service {
 		int startRow = (currentPage-1)*PAGESIZE+1;
 		int endRow = startRow + PAGESIZE -1;
 		OneBoardDao oDao = OneBoardDao.getInstance();
-		request.setAttribute("list", oDao.responseListBoard(mid, startRow, endRow)); // �?목록
+		request.setAttribute("list", oDao.responseListBoard(mid, startRow, endRow));
 		int requestTotalCnt = oDao.responseTotalCnt(mid);
-		int requestPageCnt = (int)Math.ceil((double) requestTotalCnt/PAGESIZE); // ?��?���? �??��
+		int requestPageCnt = (int)Math.ceil((double) requestTotalCnt/PAGESIZE);
 		int requestStartPage = ((currentPage-1)/BLOCKSIZE) * BLOCKSIZE +1;
 		int requestEndPage = requestStartPage + BLOCKSIZE -1;
 		if(requestEndPage > requestPageCnt) {
 			requestEndPage = requestPageCnt;
 		}
 		request.setAttribute("mid", mid);
-		request.setAttribute("BLOCKSIZE", BLOCKSIZE); // ?�� ?��?���? �??�� ?���?
+		request.setAttribute("BLOCKSIZE", BLOCKSIZE);
 		request.setAttribute("startPage", requestStartPage);
 		request.setAttribute("endPage", requestEndPage);
 		request.setAttribute("pageNum", currentPage);

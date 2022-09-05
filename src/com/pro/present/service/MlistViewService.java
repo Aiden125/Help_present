@@ -23,16 +23,16 @@ public class MlistViewService implements Service {
 			}
 			int currentPage = Integer.parseInt(pageNum);
 			final int PAGESIZE = 3, BLOCKSIZE = 5;
-			int startRow = (currentPage-1)*PAGESIZE+1; // ?��?�� 번째 ?��
-			int endRow = startRow + PAGESIZE -1; // // ?��?��?�� 번째 ?��
+			int startRow = (currentPage-1)*PAGESIZE+1;
+			int endRow = startRow + PAGESIZE -1; 
 			
 			MemberDao mDao = MemberDao.getInstance();
 			ArrayList<MemberDto> members = mDao.listMember(searchword, startRow, endRow);
 			request.setAttribute("list", members);
 			
-			int totalCnt = mDao.totalMember(searchword); // ?��록된 멤버 ?��
-			int	pageCnt = (int) Math.ceil((double)totalCnt/PAGESIZE); // ?��?���? �??��
-			int startPage = ((currentPage-1)/BLOCKSIZE)*BLOCKSIZE+1; // ?��?�� ?��?���?
+			int totalCnt = mDao.totalMember(searchword);
+			int	pageCnt = (int) Math.ceil((double)totalCnt/PAGESIZE);
+			int startPage = ((currentPage-1)/BLOCKSIZE)*BLOCKSIZE+1;
 			int endPage = startPage + BLOCKSIZE -1;
 			if(endPage > pageCnt) {
 				endPage = pageCnt;

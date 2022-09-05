@@ -13,9 +13,9 @@ public class MnameCheckService implements Service {
 		MemberDao mDao = MemberDao.getInstance();
 		int result = mDao.checkName(mname);
 		if(result == MemberDao.FAIL) {
-			request.setAttribute("nameCheckResult", "중복?�� ?��?��?��?��?��?��");
+			request.setAttribute("nameCheckResult", "중복된 닉네임입니다");
 		}else{
-			request.setAttribute("nameCheckResult", "?��?���??��?�� ?��?��?��?��?��?��");
+			request.setAttribute("nameCheckResult", "사용가능한 닉네임입니다");
 		}
 	}
 }

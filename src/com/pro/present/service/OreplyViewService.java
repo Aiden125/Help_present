@@ -20,7 +20,7 @@ public class OreplyViewService implements Service {
 			request.setAttribute("myid", myid);
 			request.setAttribute("replyView", oDao.contentViewOnlyOne(obno));
 		}else {
-			request.setAttribute("replyView", "로그?�� ?��주세?��");
+			request.setAttribute("replyView", "로그인 해주세요");
 		}
 		
 	}

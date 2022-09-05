@@ -13,9 +13,9 @@ public class OdeleteService implements Service {
 		OneBoardDao oDao = OneBoardDao.getInstance();
 		int result = oDao.delete(obno);
 		if(result == oDao.SUCCESS) {
-			request.setAttribute("deleteResult", "�??��?�� ?���?");
+			request.setAttribute("deleteResult", "글삭제 성공");
 		}else {
-			request.setAttribute("deleteResult", "�??��?�� ?��?��");			
+			request.setAttribute("deleteResult", "글삭제 실패");			
 		}
 	}
 }
