@@ -16,8 +16,8 @@ import com.pro.present.dto.FreeBoardDto;
 import com.sun.corba.se.spi.ior.WriteContents;
 
 public class FreeBoardDao {
-	public static final int SUCCESS = 1; // ?��?���??��?��
-	public static final int FAIL = 0;	// ?��?���??��?��
+	public static final int SUCCESS = 1;
+	public static final int FAIL = 0;
 	private DataSource ds = null;
 	
 	// 싱글톤 적용
