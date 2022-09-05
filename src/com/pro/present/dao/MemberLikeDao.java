@@ -105,7 +105,7 @@ public class MemberLikeDao {
 				totCnt = rs.getInt("likecheck");
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + " : checkLike ?��?��");
+			System.out.println(e.getMessage());
 		} finally {
 			try {
 				if(pstmt!=null) pstmt.close();
