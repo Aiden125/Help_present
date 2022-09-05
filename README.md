@@ -125,7 +125,7 @@ https://github.com/Aiden125/Help_present/blob/13605ea910b86e60d31f1b7bd5e960cfa6
 ## 6. 차후 개선 사항
 - 로그인 보안 강화(password 암호화 등)
 - 입력된 데이터 기반 MBTI별 인기 선물 추천
-- 실제로 사용가능하도록 배포 사이트로 배포
+- 실제로 사용가능하도록 사이트로 배포
 
 </br>
 
